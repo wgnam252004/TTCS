@@ -1,0 +1,115 @@
+.calendar-container {
+    width: 350px;
+    max-width: 100vw;
+    padding: 1.5rem;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #f8fafc 30%, #dbeafe 100%);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    align-items: center;
+    margin: 0 auto;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.1rem 0 0.7rem 0;
+    color: #1e293b;
+}
+
+.calendar-header button {
+    background: #e0e7ef;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #7F6DF8;
+    border-radius: 50%;
+    width: 2.2rem;
+    height: 2.2rem;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.calendar-header button:hover {
+    background: #2563eb;
+    color: #fff;
+    transform: scale(1.15);
+}
+
+.calendar-days{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.day-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #64748b;
+    width: calc(100% /7);
+    text-align: center;
+}
+
+.calendar-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    background: #f1f5f9;
+    padding: 0.5rem 0.2rem;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.week-row {
+    display: flex;
+    width: 100%;
+}
+
+.date-cell {
+    width: calc(100% /7);
+    padding: 0.5rem 0;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #334155;
+    background: none;
+    transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    text-align: center;
+    margin: 1px 0;
+    border: 2px solid transparent;
+    box-sizing: border-box;
+}
+
+.date-cell.dim {
+    color: #cbd5e1;
+}
+
+.date-cell.current {
+    background: #7F6DF8;
+    color: #fff;
+    font-weight: 900;
+    box-shadow: 0 2px 8px #60a5fa44;
+    border: 2px solid #7F6DF8;
+}
+
+.date-cell.selected {
+    background: #fbbf24;
+    color: #fff;
+    font-weight: 700;
+    border: 2px solid #f59e42;
+    box-shadow: 0 2px 8px #fbbf2444;
+}
+
+.date-cell:hover {
+    background: #bae6fd;
+    color: #2563eb;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* Đảm bảo calendar-section không bị dài hơn container */
+.calendar-section {
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+

@@ -1,0 +1,27 @@
+.about-container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.about-container img {
+    width: 100%;
+}
+
+.about-container .about-text {
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.about-container .about-text p {
+    font-size: 18px;
+    line-height: 150%;
+}
+
+.about-container .about-text img {
+    margin-top: 40px;
+}
+
+.about-container .about-text .p-under {
+    margin-top: 40px;
+}

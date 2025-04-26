@@ -1,0 +1,137 @@
+/* Section Styles */
+.section-wrapper {
+    width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px auto;
+}
+
+
+/* Movie Grid Styles */
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+
+}
+
+.movie-grid-item {
+    width: 210px;
+    height: 375px;
+}
+
+.movie-card {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    margin-bottom: 1.2rem;
+    width: 210px;
+    height: 375px 
+}
+
+.movie-card:hover {
+    transform: translateY(-5px);
+    cursor: pointer;
+}
+
+.movie-card img {
+    width: 100%;
+height: auto;
+    border-radius: 12px 12px 0 0;
+}
+
+.movie-card-body {
+    padding: 1rem;
+}
+
+.movie-card-title {
+    font-size: 16px;
+    color : #7F6DF8;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.3rem;
+}
+
+.movie-card-category {
+    font-size: 16px;
+    color: #000;
+}
+
+.category-family {
+    color: #7F6DF8;
+}
+
+.movie-card-img-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .movie-card-img-wrapper img {
+    width: 100%;
+    height: 300px;
+    display: block;
+  }
+  
+  /* Lớp phủ tối */
+  .img-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); 
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 12px 12px 0 0;
+  }
+  
+  /* Nút */
+  .buy-ticket-btn {
+    position: absolute;
+    bottom: 20px;
+    width: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #7F6DF8;
+    color: white;
+    font-weight: bold;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+  }
+  
+  /* Hover: hiện overlay + hiện nút */
+  .movie-card:hover .img-overlay {
+    opacity: 1;
+  }
+  
+  .movie-card:hover .buy-ticket-btn {
+    opacity: 1;
+  }
+
+
+  /* Phantrang Styles */
+
+.phantrang {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.phantrang i {
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.phantrang i:hover {
+    color: #7F6DF8;
+}

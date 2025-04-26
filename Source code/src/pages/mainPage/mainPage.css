@@ -1,0 +1,24 @@
+/* Section-header */
+.section-header {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 60px;
+    width: 270px;
+    font-size: 25px;
+    color: #7F6DF8;
+    font-weight: bold;
+    background: #fff;
+    border: 2px solid #7F6DF8;
+    z-index: 2; 
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.section-header a {
+    text-decoration: none;
+    color: #7F6DF8;
+}

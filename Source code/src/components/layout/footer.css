@@ -1,16 +1,9 @@
-body {
-    background: #F5EFFF;
-    font-family: "Roboto", sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 /* Footer Styles */
 .footer {
     background-color: #333;
     color: white;
     margin-top: 80px;
+    width: 100%;
 }
 
 .footer-logo {
@@ -32,7 +25,11 @@ body {
 }
 
 .footer-col-right {
-    margin: 20px 100px 0 100px ;
+    margin: 40px 100px 0 100px ;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    
 }
 
 .footer-tagline {
@@ -50,6 +47,7 @@ body {
 .social-icons-wrapper {
     display: flex;
     gap: 20px;
+    margin-top: 10px;
 }
 
 .social-icons-wrapper a{
@@ -59,7 +57,7 @@ body {
     transition: color 0.3s ease;
 }
 
-.social-icons h1 {
+.social-icons h2 {
     font-size: 25px;
     color: white;
 }
@@ -74,4 +72,5 @@ body {
     font-size: 0.8rem;
     color: #aaa;
     text-align: center;
+    margin-top: 20px;
 }

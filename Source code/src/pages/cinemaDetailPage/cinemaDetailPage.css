@@ -1,0 +1,126 @@
+.cinema-detail-container {
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 40px;
+  }
+  
+  .cinema-info {
+    display: flex;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px #d1c4e9;
+    margin-bottom: 30px;
+    height: 300px;
+  }
+  
+  .cinema-img {
+    width: 360px;
+    height: 225px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 50px;
+    margin-left: 50px;
+    margin-top: 38px;
+  }
+  
+  .cinema-info-content {
+    flex: 1;
+    margin-top: 50px;
+  }
+
+  .cinema-info-content p {
+    font-size: 18px;
+    line-height: 150%;
+  }
+  
+  .cinema-name {
+    color: #7F6DF8;
+    margin-bottom: 20px;
+    font-size: 25px;
+    font-weight: bold;
+
+  }
+  
+  .choose-other-cinema-btn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 16px;
+    color: #7F6DF8;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    border: 3px solid #7F6DF8;
+    transition: background 0.2s;
+  }
+  
+  .choose-other-cinema-btn:hover {
+    background: #d1c4e9;
+  }
+  
+  .cinema-schedule-section {
+    display: flex;
+    gap: 50px;
+  }
+  
+  .showtimes-list {
+    flex: none;
+    width: 550px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .showtime-card {
+    width: 500px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px #d1c4e9;
+    display: flex;
+    padding: 25px;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .filmora-logo {
+    width: 120px;
+    margin-bottom: 8px;
+  }
+  
+  .showtime-buttons {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .showtime-btn {
+    background: #616161;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .showtime-btn:hover {
+    background: #7c4dff;
+  }
+  
+  .calendar-section {
+    border-radius: 12px;
+  }
+
+  .showtime-header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 8px;
+  }
+
+  .showtime-title {
+    font-size: 18px;
+    line-height: 150%;
+  }
+
+  
