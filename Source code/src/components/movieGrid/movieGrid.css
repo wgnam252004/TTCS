@@ -46,6 +46,10 @@ height: auto;
     padding: 1rem;
 }
 
+.movie-card-body a {
+    text-decoration: none;
+}
+
 .movie-card-title {
     font-size: 16px;
     color : #7F6DF8;

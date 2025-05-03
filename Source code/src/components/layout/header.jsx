@@ -14,15 +14,13 @@ const Header = () => {
                     <Link to="/"><img src="/assets/logo.png" alt="Logo" className="logo" /></Link>
                     <div className="nav-links">
                         <ul className="nav-menu">
-                            <li className="dropdown">
-                                <Link to="/movieShowTimes" className="nav-link">
+                            <li>
+                                <Link to="/movies" >
                                     LỊCH CHIẾU
                                 </Link>
-                                <div className="dropdown-content">
-                                    <Link to="/movieShowTimes">Phim đang chiếu</Link>
-                                    <Link to="/movieShowTimes">Phim sắp chiếu</Link>
-                                    <Link to="/theaterShowTimes">Lịch theo rạp</Link>
-                                </div>
+                            </li>
+                            <li>
+                                <Link to="/theaters">Rạp phim</Link>
                             </li>
                             <li>
                                 <Link to="/AboutFilmora">VỀ FILMORA</Link>

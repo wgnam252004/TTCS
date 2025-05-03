@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import React from 'react';
 
 import './movie-slider.css';
+import { Link } from 'react-router-dom';
 
 export default function MovieSlider({ id = 'defaultSlider' }) {
   const movies = [
@@ -56,10 +57,10 @@ export default function MovieSlider({ id = 'defaultSlider' }) {
         setItemsPerPage(Math.floor(containerWidth / itemWidth) || 4);
       }
     };
-    
+
     updateItemsPerPage(); // Chạy ngay khi component mount
     window.addEventListener('resize', updateItemsPerPage);
-    
+
     return () => window.removeEventListener('resize', updateItemsPerPage);
   }, [itemWidth]);
 
@@ -89,7 +90,7 @@ export default function MovieSlider({ id = 'defaultSlider' }) {
     let interval;
     if (isAutoPlaying && !isHovering) {
       interval = setInterval(() => {
-        setCurrentIndex((prevIndex) => 
+        setCurrentIndex((prevIndex) =>
           prevIndex >= maxIndex ? 0 : prevIndex + 1
         );
       }, 4000);
@@ -99,14 +100,14 @@ export default function MovieSlider({ id = 'defaultSlider' }) {
 
   const handlePrev = () => {
     setIsAutoPlaying(false);
-    setCurrentIndex(prevIndex => 
+    setCurrentIndex(prevIndex =>
       prevIndex === 0 ? maxIndex - 1 : prevIndex - 1
     );
   };
 
   const handleNext = () => {
     setIsAutoPlaying(false);
-    setCurrentIndex(prevIndex => 
+    setCurrentIndex(prevIndex =>
       prevIndex >= maxIndex ? 1 : prevIndex + 1
     );
   };
@@ -118,8 +119,8 @@ export default function MovieSlider({ id = 'defaultSlider' }) {
 
   return (
     <div className="movie_slider_container" ref={containerRef} id={`movie-slider-${id}`}>
-      <div 
-        className="movie_slider_wrapper" 
+      <div
+        className="movie_slider_wrapper"
         ref={sliderRef}
         onMouseEnter={() => {
           setIsHovering(true);
@@ -133,7 +134,7 @@ export default function MovieSlider({ id = 'defaultSlider' }) {
         <div
           className="movie_slider_track"
           ref={trackRef}
-          style={{ 
+          style={{
             transform: `translateX(-${currentIndex * itemWidth}px)`,
             width: `${extendedMovies.length * itemWidth}px`
           }}
@@ -143,22 +144,24 @@ export default function MovieSlider({ id = 'defaultSlider' }) {
               key={index}
               className="movie_slider_item"
             >
-              <div className="movie_card_container">
-                <div className="movie_image_container">
-                  <img
-                    src={movie.image}
-                    alt={movie.title}
-                    className="movie_poster_image"
-                  />
-                </div>
-                <div className="movie_info_container">
-                  <h3 className="movie_title_text">{movie.title}</h3>
-                  <div className="movie_category_container">
-                    <span className="movie_category_label">Thể loại phim: </span>
-                    <span className="movie_category_value">{movie.category}</span>
+              <Link to="/movieBooking" style={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}>
+                <div className="movie_card_container">
+                  <div className="movie_image_container">
+                    <img
+                      src={movie.image}
+                      alt={movie.title}
+                      className="movie_poster_image"
+                    />
+                  </div>
+                  <div className="movie_info_container">
+                    <h3 className="movie_title_text">{movie.title}</h3>
+                    <div className="movie_category_container">
+                      <span className="movie_category_label">Thể loại phim: </span>
+                      <span className="movie_category_value">{movie.category}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             </div>
           ))}
         </div>

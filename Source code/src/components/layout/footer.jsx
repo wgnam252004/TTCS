@@ -21,16 +21,16 @@ const Footer = () => {
                         <div className="social-icons">
                             <h2>Mạng xã hội</h2>
                             <div className="social-icons-wrapper">
-                                <a href="#">
+                                <a href="">
                                     <i className="bi bi-facebook" />
                                 </a>
-                                <a href="#">
+                                <a href="">
                                     <i className="bi bi-instagram" />
                                 </a>
-                                <a href="#">
+                                <a href="">
                                     <i className="bi bi-tiktok" />
                                 </a>
-                                <a href="#">
+                                <a href="">
                                     <i className="bi bi-youtube" />
                                 </a>
                             </div>

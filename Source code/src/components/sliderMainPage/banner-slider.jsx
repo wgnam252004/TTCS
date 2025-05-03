@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './banner-slider.css';
+import { Link } from 'react-router-dom';
 
 const ImageSlider = () => {
   const [itemActive, setItemActive] = useState(0);
@@ -139,21 +140,19 @@ const ImageSlider = () => {
   return (
     <div className="slider" ref={sliderRef}>
       {/* list Items */}
-      <div className="list">
-        {sliderData.map((slide, index) => (
-          <div key={index} className={`item ${index === 0 ? 'active' : ''}`}>
-            <img src={slide.image} alt={slide.title} />
-            <div className="content">
-              <h2>{slide.title}</h2>
-              <p>{slide.description}</p>
-              <div className="banner-actions">
-                <a href="#" className="btn-banner-actions">MUA VÉ NGAY</a>
-                <a href="#" className="btn-banner-actions">THÔNG TIN PHIM</a>
+      <Link to="/movieBooking">
+        <div className="list">
+          {sliderData.map((slide, index) => (
+            <div key={index} className={`item ${index === 0 ? 'active' : ''}`}>
+              <img src={slide.image} alt={slide.title} />
+              <div className="content">
+                <h2>{slide.title}</h2>
+                <p>{slide.description}</p>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </Link>
 
       {/* button arrows */}
       <div className="arrows">

@@ -6,12 +6,15 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import MainPage from './pages/mainPage/mainPage'
-import MovieShowtimesPage from './pages/movieShowtimesPage/movieShowtimesPage';
-import TheaterShowTimes from './pages/theaterShowtimesPage/theaterShowtimesPage';
+import MainPage from './pages/mainPage';
+import MoviesPage from './pages/movies';
+import TheatersPage from './pages/theatersPage/theaters';
 import LoginRegister from './pages/LoginRegisterPage/LoginRegisterPage';
 import AboutFilmora from './pages/aboutFilmoraPage/aboutFilmoraPage';
-import CinemaDetail from './pages/cinemaDetailPage/cinemaDetailPage';
+import CinemaInfoPage from './pages/cinemaInfo';
+import ChooseShowTime from './pages/chooseShowTime';
+import ChooseSeat from './pages/chooseSeat';
+import PayTicket from './pages/payTicket';
 
 const router = createBrowserRouter([
   {
@@ -23,12 +26,12 @@ const router = createBrowserRouter([
         element: <MainPage />,
       },
       {
-        path: "/movieShowTimes",
-        element: <MovieShowtimesPage />
+        path: "/movies",
+        element: <MoviesPage />
       },
       {
-        path: "/theaterShowTimes",
-        element: <TheaterShowTimes />
+        path: "/theaters",
+        element: <TheatersPage />
       },
       {
         path: "/AboutFilmora",
@@ -36,18 +39,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/cinemaDetail",
-        element: <CinemaDetail />
+        element: <CinemaInfoPage />
+      },
+      {
+        path: "/movieBooking",
+        element: <ChooseShowTime />,
+      },
+      {
+        path: "/bookingChair",
+        element: <ChooseSeat />
+      },
+      {
+        path: "/payTicket",
+        element: <PayTicket />
       }
-
     ]
   },
-
   {
     path: "/LoginOrRegister",
     element: <LoginRegister />
   }
 ]);
-
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

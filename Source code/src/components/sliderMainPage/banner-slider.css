@@ -32,7 +32,7 @@
 .slider .list .item .content{
     position: absolute;
     margin-left: 50px;
-    top: 20%;
+    top: 30%;
     width: 590px;
     max-width: 80%;
     z-index: 1;
@@ -121,6 +121,7 @@
     font-size: x-large;
     color: #eee;
     transition: .5s;
+    cursor: pointer;
 }
 .arrows button:hover{
     background-color: #eee;
@@ -133,10 +134,10 @@
     display: flex;
     margin-left: 50px;
     gap: 10px;
-    width: 100%;
     height: 180px;
     box-sizing: border-box;
     overflow: auto;
+    cursor: pointer;
 }
 .thumbnail::-webkit-scrollbar{
     width: 0;

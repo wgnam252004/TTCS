@@ -1,0 +1,119 @@
+/* Ticket Information Container */
+.ticketBooking__infoContainer {
+    width: 400px;
+    height: 320px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .ticketBooking__infoHeader {
+    margin-bottom: 16px;
+  }
+  
+  .ticketBooking__theaterName {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 0 0 4px 0;
+  }
+  
+  .ticketBooking__screenInfo {
+    color: #7F6DF8;
+    font-size: 14px;
+    margin: 0;
+  }
+  
+  .ticketBooking__movieInfo {
+    margin-bottom: 24px;
+  }
+  
+  .ticketBooking__movieTitle {
+    color: #7F6DF8;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .ticketBooking__ticketDetails {
+    flex-grow: 1;
+  }
+  
+  .ticketBooking__ticketRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  
+  .ticketBooking__ticketLabel {
+    font-size: 14px;
+  }
+  
+  .ticketBooking__ticketValue {
+    font-weight: bold;
+  }
+  
+  .ticketBooking__seatInfo {
+    color: #7F6DF8;
+    font-weight: bold;
+  }
+  
+  .ticketBooking__totalRow {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 16px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .ticketBooking__totalLabel {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .ticketBooking__totalValue {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .ticketBooking__actionButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .ticketBooking__payButton {
+    background-color: #7F6DF8;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .ticketBooking__payButton:hover {
+    background-color: #6a5add;
+  }
+  
+  .ticketBooking__backButton {
+    background: transparent;
+    color: #7F6DF8;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    margin: 0 auto;
+    transition: color 0.2s ease;
+  }
+
+  
+  
+  .ticketBooking__backButton:hover {
+    color: #6a5add;
+    text-decoration: underline;
+  }

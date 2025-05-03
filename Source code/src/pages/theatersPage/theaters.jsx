@@ -1,8 +1,8 @@
 import React from "react";
-import './theaterShowtimesPage.css';
+import './theaters.css';
 import { Link, NavLink } from 'react-router-dom'
 
-const TheaterShowTimes = () => {
+const TheatersPage = () => {
     const movieData = [
         {
             id: 1,
@@ -54,4 +54,4 @@ const TheaterShowTimes = () => {
     );
 }
 
-export default TheaterShowTimes;
+export default TheatersPage;

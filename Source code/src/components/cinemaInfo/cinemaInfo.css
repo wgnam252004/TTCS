@@ -1,0 +1,58 @@
+.cinema-detail-container {
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 40px;
+  }
+  
+  .cinema-info {
+    display: flex;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px #d1c4e9;
+    margin-bottom: 30px;
+    height: 300px;
+  }
+  
+  .cinema-img {
+    width: 360px;
+    height: 225px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 50px;
+    margin-left: 50px;
+    margin-top: 38px;
+  }
+  
+  .cinema-info-content {
+    flex: 1;
+    margin-top: 50px;
+  }
+
+  .cinema-info-content p {
+    font-size: 18px;
+    line-height: 150%;
+  }
+  
+  .cinema-name {
+    color: #7F6DF8;
+    margin-bottom: 20px;
+    font-size: 25px;
+    font-weight: bold;
+
+  }
+  
+  .choose-other-cinema-btn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 16px;
+    color: #7F6DF8;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    border: 3px solid #7F6DF8;
+    transition: background 0.2s;
+  }
+  
+  .choose-other-cinema-btn:hover {
+    background: #d1c4e9;
+  }
