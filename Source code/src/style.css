@@ -22,12 +22,6 @@ body {
     align-items: center;
 }
 
-
-
-
-
-
-
 a, a:visited, a:active, a:focus, .section-header a, .theater-title, .footer a, .nav-menu a, .choose-other-cinema-btn, .choose-other-movie-btn {
   text-decoration: none !important;
   cursor: pointer !important;
