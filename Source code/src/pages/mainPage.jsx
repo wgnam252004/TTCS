@@ -1,5 +1,6 @@
 import ImageSlider from '../components/sliderMainPage/banner-slider';
-import MovieSlider from '../components/sliderMainPage/movie-slider';
+import NowShowingSlider from '../components/sliderMainPage/NowShowingSlider';
+import ComingSoonSlider from '../components/sliderMainPage/ComingSoonSlider';
 import React from 'react';
 import { Link } from 'react-router-dom'
 
@@ -10,16 +11,16 @@ const MainPage = () => {
             <ImageSlider />
 
             <div className="section-header">
-                <Link to="/movieShowtimes">Phim đang chiếu</Link>
+                <Link to="/movieShowtimes">PHIM ĐANG CHIẾU</Link>
             </div>
 
-            <MovieSlider id="nowShowing" />
+            <NowShowingSlider />
 
             <div className="section-header">
-                <Link to="/movieShowtimes">Phim sắp chiếu</Link>
+                <Link to="/movieShowtimes">PHIM SẮP CHIẾU</Link>
             </div>
 
-            <MovieSlider id="comingSoon" />
+            <ComingSoonSlider />
 
         </div>
     )

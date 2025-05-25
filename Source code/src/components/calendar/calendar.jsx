@@ -3,9 +3,11 @@ import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, subM
 
 import './calendar.css';
 
-const Calendar = () => {
+const Calendar = ({ onDateSelect }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
 
   const startDate = startOfWeek(startOfMonth(currentDate));
   const endDate = endOfWeek(endOfMonth(currentDate));
@@ -60,7 +62,23 @@ const Calendar = () => {
                 } ${
                   format(date, "yyyy-MM-dd") === format(selectedDate, "yyyy-MM-dd") ? 'selected' : ""
                 }`}
-                onClick={() => setSelectedDate(date)}
+                onClick={() => {
+                const todayStart = new Date();
+                todayStart.setHours(0, 0, 0, 0);
+                const dateStart = new Date(date);
+                dateStart.setHours(0, 0, 0, 0);
+                
+                if (dateStart >= todayStart) {
+                  setSelectedDate(date);
+                  if (onDateSelect) {
+                    onDateSelect(date);
+                  }
+                }
+              }}
+              style={{
+                cursor: date < todayStart ? 'not-allowed' : 'pointer',
+                opacity: date < todayStart ? 0.5 : 1
+              }}
               >
                 {format(date, "d")}
               </div>

@@ -1,0 +1,116 @@
+.registerpage_wrapper_flex_center_p10 {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.registerpage_container {
+  max-width: 1200px;
+  width: 100%;
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.registerpage_flex_gap16_justifybetween {
+  display: flex;
+  gap: 2rem;
+  padding: 3rem;
+}
+
+.registerpage_left_wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.registerpage_right_wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin:auto;
+}
+
+.registerpage_heading {
+  font-size: 2.25rem;
+  color: #2c3e50;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.registerpage_subtext {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+.login-forget-pass {
+    display: flex;
+    justify-content: center;
+}
+.registerpage_form_wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.registerpage_input {
+  height: 48px;
+  border: 1px solid #e0e0e0;
+  border-radius: 0.5rem;
+  outline: none;
+  padding: 0 1rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.registerpage_input:focus {
+  border-color: #515def;
+}
+
+.registerpage_button {
+  width: 100%;
+  height: 48px;
+  background-color: #515def;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.registerpage_button:hover {
+  background-color: #4040c0;
+}
+
+.registerpage_login_text {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+.registerpage_login_link {
+  color: #515def;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.registerpage_login_link:hover {
+  text-decoration: underline;
+}
+
+.registerpage_left_wrapper img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}

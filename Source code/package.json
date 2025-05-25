@@ -6,23 +6,47 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node src/index.js",
+    "dev:server": "nodemon src/index.js",
+    "dev:frontend": "vite",
+    "dev:both": "concurrently \"npm run dev:server\" \"npm run dev:frontend\""
   },
   "dependencies": {
+    "@clerk/clerk-js": "^5.67.2",
+    "@clerk/nextjs": "^6.19.5",
+    "antd": "^5.25.1",
+    "axios": "^1.9.0",
+    "bcryptjs": "^3.0.2",
+    "bootstrap-icons": "^1.13.1",
+    "cheerio": "^1.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
     "flickity": "^3.0.0",
+    "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.503.0",
+    "mongoose": "^8.15.0",
+    "nodemailer": "^7.0.3",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.9",
     "react-dom": "^19.1.0",
+    "react-icons": "^5.5.0",
     "react-router-dom": "^7.5.1",
     "react-slick": "^0.30.3",
     "rsuite": "^5.80.1",
     "slick-carousel": "^1.8.1",
+    "sweetalert2": "^11.21.2",
     "swiper": "^11.2.6",
     "vue": "^3.5.13"
   },
   "devDependencies": {
+    "@vitejs/plugin-react": "^4.4.1",
     "@vitejs/plugin-vue": "^5.2.2",
+    "concurrently": "^9.1.2",
+    "nodemon": "^3.1.10",
+    "postcss": "^8.5.3",
     "vite": "^6.3.1"
   }
 }

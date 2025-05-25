@@ -21,7 +21,7 @@
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: left;
   }
   
   .showtime-btn {
@@ -46,7 +46,7 @@
   }
 
   .showtime-title {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 150%;
   }
 

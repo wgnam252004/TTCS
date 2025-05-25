@@ -1,44 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import React from 'react';
-
-import './movie-slider.css';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-export default function MovieSlider({ id = 'defaultSlider' }) {
-  const movies = [
-    {
-      title: 'CRAYON SHIN-CHAN: BÍ ẨN HỌC VIỆN HOA LỆ TENKASU',
-      category: 'Family',
-      image: '/assets/phim-Shin-small.png',
-    },
-    {
-      title: 'THÁM TỬ KIÊN: KỲ ÁN KHÔNG ĐẦU',
-      category: 'Mystery',
-      image: '/assets/phim-Tham-tu-kien-small.jpg',
-    },
-    {
-      title: 'WOOLINA AND THE NO BIRD: MUÔNG THÚ DẠY BÉ CỪU BAY',
-      category: 'Family',
-      image: '/assets/phim-Woolina-and-the-no-bird-small.jpg',
-    },
-    {
-      title: 'LẬT MẶT 8: VÒNG TAY NẮNG',
-      category: 'Horror',
-      image: '/assets/phim-Lat-mat-8-small.png',
-    },
-    {
-      title: 'THUNDERBOLTS*: BIỆT ĐỘI SẤM SÉT*',
-      category: 'Action',
-      image: '/assets/phim-Thunderbolts-small.png',
-    },
-    {
-      title: 'A MINECRAFT MOVIE: MỘT BỘ PHIM MINECRAFT',
-      category: 'Sci-Fi',
-      image: '/assets/phim-Minecraft-small.jpg',
-    }
-  ];
-
+const MovieSliderBase = ({ type, id = 'defaultSlider' }) => {
+  const [movies, setMovies] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [isHovering, setIsHovering] = useState(false);
@@ -48,6 +15,25 @@ export default function MovieSlider({ id = 'defaultSlider' }) {
   const itemWidth = 264; // Chiều rộng mỗi item
   const [itemsPerPage, setItemsPerPage] = useState(4);
   const maxIndex = movies.length;
+
+  // Lấy dữ liệu từ API
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/movies/${type}`);
+        setMovies(response.data.map(movie => ({
+          title: movie.title,
+          category: movie.genre,
+          image: movie.small_img, // Sử dụng small_img
+          id: movie._id // Make sure to include the movie ID
+        })));
+      } catch (error) {
+        console.error(`Error fetching movies:`, error);
+      }
+    };
+
+    fetchMovies();
+  }, [type]);
 
   // Cập nhật itemsPerPage dựa trên kích thước container
   useEffect(() => {
@@ -144,7 +130,7 @@ export default function MovieSlider({ id = 'defaultSlider' }) {
               key={index}
               className="movie_slider_item"
             >
-              <Link to="/movieBooking" style={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}>
+              <Link to={`/chooseShowTimes/${movie.id}`} style={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}>
                 <div className="movie_card_container">
                   <div className="movie_image_container">
                     <img
@@ -195,4 +181,6 @@ export default function MovieSlider({ id = 'defaultSlider' }) {
       </div>
     </div>
   );
-}
+};
+
+export default MovieSliderBase;

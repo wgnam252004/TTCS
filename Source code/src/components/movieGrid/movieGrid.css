@@ -7,6 +7,55 @@
     margin: 30px auto;
 }
 
+.pagination-container{
+    margin-top: 20px;
+}
+
+/* Style cho phân trang Ant Design */
+.ant-pagination-item a,
+.ant-pagination-item-active a,
+.ant-pagination-item:hover a {
+    color: #7F6DF8;
+}
+
+/* Thay đổi màu nền của trang đang chọn */
+.ant-pagination-item-active {
+    background-color: #7F6DF8 !important;
+    border-color: #7F6DF8 !important;
+}
+
+.ant-pagination-item-active a {
+    color: white !important;
+}
+
+.ant-pagination-item-active a:hover {
+    color: white !important;
+}
+
+/* Thay đổi màu khi hover */
+.ant-pagination-item:hover {
+    border-color: #7F6DF8 !important;
+}
+
+.ant-pagination-item:hover a {
+    color: #7F6DF8 !important;
+}
+
+/* Thay đổi màu của nút điều hướng */
+.ant-pagination-prev:hover,
+.ant-pagination-next:hover {
+    border-color: #7F6DF8 !important;
+}
+
+.ant-pagination-prev:hover a,
+.ant-pagination-next:hover a {
+    color: #7F6DF8 !important;
+}
+
+.ant-pagination-jump-prev .ant-pagination-item-container,
+.ant-pagination-jump-next .ant-pagination-item-container {
+    color: #7F6DF8 !important;
+}
 
 /* Movie Grid Styles */
 .movie-grid {

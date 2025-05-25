@@ -1,6 +1,6 @@
 .md-detail-container {
     width: 1000px;
-    height: 400px;
+    height: 500px;
     display: flex;
     flex-direction: row;
     background: #fff;
@@ -12,8 +12,8 @@
   }
   
   .md-detail-img-container {
-    width: 250px;
-    height: 350px;
+    width: 350px;
+    height: 450px;
     display: flex;
     overflow: hidden;
     margin: 25px 0 25px 50px;
@@ -49,6 +49,10 @@
   .md-detail-info-list > div {
     font-size: 16px;
     margin-bottom: 10px;
+  }
+
+  .movie-detail-value {
+    color: #7F6DF8;
   }
   
   .choose-other-movie-btn {

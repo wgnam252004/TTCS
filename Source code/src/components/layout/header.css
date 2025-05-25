@@ -70,6 +70,55 @@
     border: 1px solid #7F6DF8;
 }
 
+.user-profile {
+    position: relative;
+    margin-left: 10px;
+}
+
+.profile-icon {
+    font-size: 32px;
+    color: #7F6DF8;
+    padding: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.profile-icon:hover {
+    background-color: rgba(127, 109, 248, 0.1);
+    transform: scale(1.1);
+    color: #7F6DF8;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    height: 30px !important;
+    min-width: 150px;
+    margin-top: 8px;
+    z-index: 1000;
+
+}
+
+.dropdown-item {
+    width: 100%;
+    padding: 10px 20px;
+    text-align: left;
+    text-decoration: none;
+    display: block;
+    color: #595959;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #f5f5f5;
+    color: #7F6DF8;
+}
+
 
 .dropdown {
     position: relative;
