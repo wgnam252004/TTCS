@@ -1,2 +1,29 @@
-# XÂY DỰNG WEBSITE ĐẶT VÉ XEM PHIM TRỰC TUYẾN
-Link Figma: [Figma](https://www.figma.com/design/Q7kug8gep2GJ65cX4dJG62/Web-%C4%90%E1%BA%B7t-V%C3%A9-Xem-Phim-Tr%E1%BB%B1c-Tuy%E1%BA%BFn-Filmora?node-id=0-1&t=IY18SdbDR8ohMw5p-1)
+# Website Bán vé xem phim trực tuyến
+
+- **Đề cương đề tài** [Đề cương]()
+- **Báo cáo cuối kỳ** [Báo cáo]()
+---
+
+## Hướng dẫn cài đặt và chạy project
+
+### Bước 1. Git clone project về máy
+
+```bash
+git clone https://github.com/wgnam252004/TTCS.git
+```
+
+### Bước 2. Cài đặt dependencies cho frontend và backend
+
+```bash
+cd '.\Source code\'
+npm i
+```
+
+### 3. Chạy project
+
+```bash
+npm run dev:both
+```
+
+---
+
