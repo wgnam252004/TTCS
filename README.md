@@ -1,7 +1,4 @@
 # Website Bán vé xem phim trực tuyến
-
-- **Đề cương đề tài** [Đề cương]()
-- **Báo cáo cuối kỳ** [Báo cáo]()
 ---
 
 ## Hướng dẫn cài đặt và chạy project
