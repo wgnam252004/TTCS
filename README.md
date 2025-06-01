@@ -1,4 +1,8 @@
 # Website Bán vé xem phim trực tuyến
+
+# Báo cáo cuối kỳ
+
+📄 **[Download PDF Report](./B22DCDT208_final_report.pdf)**
 ---
 
 ## Hướng dẫn cài đặt và chạy project
