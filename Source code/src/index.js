@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import Movie from './models/Movie.js';
 import cookieParser from 'cookie-parser';
-import './db.js'; // Import file cấu hình MongoDB
+import './db.js'; 
 import authRouter from './routes/authRoutes.js';
 
 
@@ -12,7 +12,6 @@ dotenv.config();
 
 const app = express();
 
-// Middleware
 app.use(cors({
     origin: process.env.CLIENT_URL,
     credentials: true,
@@ -29,11 +28,6 @@ app.use('/api/v1/auth', authRouter);
 
 
 
-// Connect to MongoDB
-// Sử dụng mongoose đã được cấu hình trong file db.js
-// Không cần gọi connect ở đây vì nó đã được gọi trong file db.js
-
-// Routes
 import movieRoutes from './api/movie.js';
 import cinemaRoutes from './api/cinema.js';
 import roomRoutes from './api/room.js';
@@ -50,7 +44,6 @@ app.use('/api/showtimes', showtimeRoutes);
 app.use('/api/cinemaShowtimes', cinemaShowtimesRoutes);
 app.use('/api/users', userRoutes);
 
-// Booking routes
 import bookingRoutes from './routes/bookingRoutes.js';
 app.use('/api/bookings', bookingRoutes);
 

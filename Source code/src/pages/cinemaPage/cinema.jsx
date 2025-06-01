@@ -12,7 +12,6 @@ const CinemaPage = () => {
 
     const fetchCinemas = async () => {
         try {
-            // Replace with your actual backend URL
             const response = await fetch('http://localhost:3000/api/cinemas');
             const data = await response.json();
             if (!response.ok) {

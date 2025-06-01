@@ -52,8 +52,6 @@ const Login = () => {
         <div className="registerpage_wrapper_flex_center_p10">
             <div className="registerpage_container">
                 <div className="registerpage_flex_gap16_justifybetween">
-                    {/* left wrapper */}
-                    {/* right wrapper */}
                     <div className="registerpage_right_wrapper">
                         <h3 className="registerpage_heading">
                             Đăng nhập

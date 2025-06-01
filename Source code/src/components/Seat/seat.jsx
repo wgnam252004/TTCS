@@ -3,7 +3,6 @@ import './seat.css';
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from 'axios';
 
-// Xóa import Link vì không cần dùng nữa
 
 const Seat = ({ onSeatsChange }) => {
     const [selectedSeats, setSelectedSeats] = useState([]);
@@ -13,10 +12,8 @@ const Seat = ({ onSeatsChange }) => {
     const navigate = useNavigate();
     const location = useLocation();
     
-    // Lấy showtimeId từ URL params hoặc location state
     const showtimeId = location.state?.showtimeId || window.location.pathname.split('/').pop();
 
-    // Xử lý chuyển hướng không cần tải lại trang
     const handleNavigate = (path) => {
         navigate(path, { replace: true });
     };
@@ -40,7 +37,6 @@ const Seat = ({ onSeatsChange }) => {
     }, [showtimeId]);
 
     useEffect(() => {
-        // Thông báo về thay đổi ghế đã chọn cho component cha
         if (onSeatsChange && showtimeData) {
             const selectedSeatDetails = selectedSeats.map(seatId => {
                 const seat = showtimeData.seats.find(s => s.seat_id === seatId);
@@ -56,9 +52,8 @@ const Seat = ({ onSeatsChange }) => {
     const handleSeatClick = (seatId) => {
         const seat = showtimeData.seats.find(s => s.seat_id === seatId);
         
-        // Kiểm tra trạng thái ghế
         if (seat.status !== 'available') {
-            return; // Không cho phép chọn ghế đã được đặt
+            return; 
         }
 
         if (selectedSeats.includes(seatId)) {
@@ -93,7 +88,6 @@ const Seat = ({ onSeatsChange }) => {
             grouped[seat.row].push(seat);
         });
         
-        // Sắp xếp ghế theo cột trong mỗi hàng
         Object.keys(grouped).forEach(row => {
             grouped[row].sort((a, b) => a.column - b.column);
         });

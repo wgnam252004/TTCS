@@ -65,28 +65,6 @@ const CinemaInfoPage = () => {
     );
 
     
-    return (
-        <>
-            {/* <div className="section-header">
-                <Link to={`/cinemaDetail/${id}`} className="section-header-link">
-                    Filmora Tây Hồ
-                </Link>
-            </div> */}
-
-
-            <div className="cinema-detail-container">
-
-                <CinemaInfo cinemaId={id} />
-
-                <div className="cinema-schedule-section">
-                    <Showtime cinemaId={id} />
-                    <div className="calendar-section">
-                        <Calendar cinemaId={id} />
-                    </div>
-                </div>
-            </div>
-        </>
-    );
 };
 
 export default CinemaInfoPage

@@ -11,14 +11,12 @@ const createBooking = async (req, res) => {
         let userId;
 
         try {
-            // Kiểm tra token
             if (!token) {
                 return res.status(401).json({
                     message: 'Token không hợp lệ'
                 });
             }
 
-            // Xác thực token và lấy userId
             const decoded = jwt.verify(token, process.env.ACCESS_TOKEN);
             userId = decoded.userId;
 
@@ -34,7 +32,6 @@ const createBooking = async (req, res) => {
             });
         }
 
-        // Lấy thông tin suất chiếu
         const showtime = await Showtime.findById(showtimeId);
         if (!showtime) {
             return res.status(404).json({
@@ -42,12 +39,12 @@ const createBooking = async (req, res) => {
             });
         }
 
-        // Extract seat IDs từ seats array
+
         const seatIds = seats.map(seat => {
             return typeof seat === 'string' ? seat : seat.seat_id;
         });
 
-        // Kiểm tra xem ghế đã được đặt chưa
+ 
         const unavailableSeats = showtime.seats.filter(seat => 
             seatIds.includes(seat.seat_id) && seat.status !== 'available'
         );
@@ -59,7 +56,7 @@ const createBooking = async (req, res) => {
             });
         }
 
-        // Tạo ID mới cho booking
+   
         const lastBooking = await Booking.findOne().sort({ id: -1 });
         let newId = 'B0001';
         if (lastBooking && lastBooking.id) {
@@ -67,7 +64,7 @@ const createBooking = async (req, res) => {
             newId = `B${(currentId + 1).toString().padStart(4, '0')}`;
         }
 
-        // Tạo booking mới
+
         const booking = new Booking({
             id: newId,
             userId,
@@ -78,30 +75,29 @@ const createBooking = async (req, res) => {
             totalAmount
         });
 
-        // Lưu booking vào database
+   
         await booking.save();
 
-        // Cách 1: Update trực tiếp bằng cách lấy document, modify và save
+     
         try {
-            // Update seat status
+      
             showtime.seats.forEach(seat => {
                 if (seatIds.includes(seat.seat_id)) {
                     seat.status = 'booked';
                 }
             });
 
-            // Add to bookedSeats array
+   
             if (!showtime.bookedSeats) {
                 showtime.bookedSeats = [];
             }
             showtime.bookedSeats.push(...seatIds);
 
-            // Save the updated showtime
             await showtime.save();
 
         } catch (updateError) {
             console.error('Error updating showtime:', updateError);
-            // Rollback booking nếu không thể update showtime
+
             await Booking.findByIdAndDelete(booking._id);
             return res.status(500).json({
                 message: 'Không thể cập nhật trạng thái ghế'
@@ -132,10 +128,9 @@ const createBooking = async (req, res) => {
 
 const getBookings = async (req, res) => {
     try {
-        // Lấy tất cả booking
         const bookings = await Booking.find();
         
-        // Format lại dữ liệu để hiển thị tốt hơn
+
         const formattedBookings = bookings.map(booking => ({
             id: booking.id,
             userId: booking.userId,
@@ -163,7 +158,7 @@ const getUserBookings = async (req, res) => {
     try {
         const { userId } = req.params;
         
-        // Lấy các booking của người dùng
+  
         const bookings = await Booking.find({ userId })
             .populate({
                 path: 'showtimeId',
@@ -182,7 +177,7 @@ const getUserBookings = async (req, res) => {
                 ]
             });
         
-        // Format lại dữ liệu để hiển thị tốt hơn
+     
         const formattedBookings = bookings.map(booking => ({
             id: booking.id,
             userId: booking.userId,

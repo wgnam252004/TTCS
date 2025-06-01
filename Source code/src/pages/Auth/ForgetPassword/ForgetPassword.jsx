@@ -48,7 +48,7 @@ const ForgetPassword = () => {
             <div className="forget-password-wrapper">
                 <div className="forget-password-content">
 
-                    {/* right wrapper */}
+    
                     <div className="forget-password-right">
                         <h3 className="forget-password-title">
                             Quên mật khẩu
@@ -73,7 +73,7 @@ const ForgetPassword = () => {
                         </form>
                     </div>
 
-                    {/* left wrapper */}
+   
                     <div class="forget-password-left">
                         <img src="/assets/3293465.jpg" alt="login" />
                     </div>

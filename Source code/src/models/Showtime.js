@@ -18,8 +18,8 @@ const showtimeSchema = new mongoose.Schema({
     end_time: { type: Date, required: true },
     date: { type: String, required: true },
     base_price: { type: Number, required: true },
-    seats: [seatSchema], // Đảm bảo seats được định nghĩa như một array of seatSchema
-    bookedSeats: [{ type: String }], // Array chứa seat_id của các ghế đã đặt
+    seats: [seatSchema], 
+    bookedSeats: [{ type: String }],
     created_at: { type: Date, default: Date.now },
     updated_at: { type: Date, default: Date.now },
     expireAt: { type: Date }

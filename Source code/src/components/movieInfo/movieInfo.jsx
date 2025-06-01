@@ -6,7 +6,7 @@ import './movieInfo.css';
 const MovieInfo = ({ movieId }) => {
     const { id } = useParams();
     
-    // Use movieId from URL parameter
+ 
     const movieIdToUse = id;
     const [movie, setMovie] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -34,7 +34,6 @@ const MovieInfo = ({ movieId }) => {
         fetchMovieDetails();
     }, [id]);
 
-    // Format date function
     const formatDate = (dateString) => {
         if (!dateString) return "N/A";
         const date = new Date(dateString);

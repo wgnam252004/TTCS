@@ -7,7 +7,7 @@ const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(localStorage.getItem('token') || null);
     const axiosInstance = useAxiosInstance();
 
-    // Cập nhật token khi thay đổi trong localStorage
+
     useEffect(() => {
         const storedToken = localStorage.getItem('token');
         if (storedToken !== token) {
@@ -25,12 +25,12 @@ const AuthProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        // Kiểm tra token khi component mount
+  
         checkAuth();
     }, []);
 
     useEffect(() => {
-        // Kiểm tra token khi token thay đổi
+   
         checkAuth();
     }, [token]);
 
@@ -43,7 +43,7 @@ const AuthProvider = ({ children }) => {
             };
 
             if (url === '/register') {
-                // Thêm ID và role vào body
+            
                 const newId = `U${(body.id || '0000')}`;
                 config.data = {
                     ...body,
@@ -56,7 +56,7 @@ const AuthProvider = ({ children }) => {
             
             if (url === '/login' && res?.status === 200) {
                 const newToken = res.data.token;
-                // Lưu thông tin người dùng vào localStorage
+          
                 localStorage.setItem('token', newToken);
                 localStorage.setItem('user', JSON.stringify(res.data.user));
                 setToken(newToken);
@@ -96,7 +96,7 @@ const AuthProvider = ({ children }) => {
         }
     };
 
-    // Lấy role từ localStorage
+   
     const getUserRole = () => {
         const user = localStorage.getItem('user');
         if (user) {
@@ -106,7 +106,7 @@ const AuthProvider = ({ children }) => {
         return 'User';
     };
 
-    // Kiểm tra quyền truy cập
+
     const canAccessAdmin = () => {
         const role = getUserRole();
         return role === 'Admin';

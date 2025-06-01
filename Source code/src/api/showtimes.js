@@ -2,21 +2,21 @@ import express from 'express';
 const router = express.Router();
 import Showtime from '../models/Showtime.js';
 
-// API to get showtimes for a specific date
+
 router.get('/by-date', async (req, res) => {
     try {
         const { date, movieId } = req.query;
         
-        // Convert date string to Date object
+   
         const searchDate = new Date(date);
         
-        // Get today's date
+  
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         const tomorrow = new Date(today);
         tomorrow.setDate(tomorrow.getDate() + 1);
 
-        // Find showtimes for the specific date and movie (if provided)
+     
         const query = {
             date: searchDate,
             is_active: true,
@@ -36,7 +36,7 @@ router.get('/by-date', async (req, res) => {
             .populate('room_id', 'name')
             .lean();
 
-        // Group showtimes by cinema
+  
         const groupedShowtimes = showtimes.reduce((acc, showtime) => {
             const cinemaId = showtime.cinema_id._id;
             if (!acc[cinemaId]) {
@@ -56,7 +56,7 @@ router.get('/by-date', async (req, res) => {
             return acc;
         }, {});
 
-        // Convert object to array
+   
         const result = Object.values(groupedShowtimes);
         
         res.json(result);

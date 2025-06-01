@@ -30,7 +30,6 @@ const ViewSeatDetail = ({ showtime, onClose }) => {
             return <div>Loading...</div>;
         }
 
-        // Nhóm ghế theo hàng
         const groupedSeats = {};
         showtime.seats.forEach(seat => {
             if (!groupedSeats[seat.row]) {
@@ -39,7 +38,6 @@ const ViewSeatDetail = ({ showtime, onClose }) => {
             groupedSeats[seat.row].push(seat);
         });
 
-        // Sắp xếp ghế theo cột trong mỗi hàng
         Object.keys(groupedSeats).forEach(row => {
             groupedSeats[row].sort((a, b) => a.column - b.column);
         });
@@ -50,7 +48,7 @@ const ViewSeatDetail = ({ showtime, onClose }) => {
                     <div className="ticketBooking__screenText">Màn hình</div>
                 </div>
                 
-                {/* Hiển thị các hàng ghế */}
+                
                 {Object.entries(groupedSeats).map(([row, seats]) => (
                     <div key={row} className="seat-row">
                         <div className="row-label">{row}</div>
@@ -69,7 +67,6 @@ const ViewSeatDetail = ({ showtime, onClose }) => {
                     </div>
                 ))}
 
-                {/* Legend */}
                 <div className="ticketBooking__legend">
                     <div className="ticketBooking__legendItem">
                         <div className="ticketBooking__seat ticketBooking__seat--available"></div>

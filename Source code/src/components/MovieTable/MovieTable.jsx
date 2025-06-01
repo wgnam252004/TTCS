@@ -14,7 +14,6 @@ const MovieTable = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Phương thức cập nhật danh sách phim sau khi thêm thành công
     const onAddSuccess = (newMovie) => {
         setMovies(prevMovies => [...prevMovies, newMovie]);
     };
@@ -29,7 +28,6 @@ const MovieTable = () => {
         setIsAddModalOpen(true);
     };
 
-    // Configure axios base URL using Vite env variables
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
     axios.defaults.baseURL = API_URL;
 
@@ -96,7 +94,6 @@ const MovieTable = () => {
         try {
             setLoading(true);
             const response = await axios.get('/api/movies');
-            // Đảm bảo mỗi item có key duy nhất
             const moviesWithKeys = response.data.map(movie => ({
                 ...movie,
                 key: movie._id
@@ -111,7 +108,6 @@ const MovieTable = () => {
         }
     };
 
-    // Hàm xử lý xóa phim
     const handleDelete = async (id) => {
         try {
             const result = await Swal.fire({
@@ -132,7 +128,7 @@ const MovieTable = () => {
                     text: 'Phim đã được xóa thành công.',
                     icon: 'success'
                 });
-                fetchMovies(); // Cập nhật danh sách phim
+                fetchMovies(); 
             }
         } catch (error) {
             Swal.fire({
@@ -144,7 +140,6 @@ const MovieTable = () => {
         }
     };
 
-    // Hàm xử lý sửa phim
     const handleEdit = (id) => {
         setEditMovieId(id);
         setIsEditModalOpen(true);

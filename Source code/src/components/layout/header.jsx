@@ -23,9 +23,8 @@ const Header = () => {
         }
     }, []);
 
-    // Kiểm tra lại trạng thái đăng nhập khi component mount và khi token thay đổi
     useEffect(() => {
-        // Không cần gọi checkAuth vì token đã được cập nhật từ context
+ 
     }, [token]);
 
     const [showSuccess, setShowSuccess] = useState(false);
@@ -38,7 +37,7 @@ const Header = () => {
                 icon: "success",
                 draggable: true
             });
-            // Reset sau khi hiển thị
+       
             setShowSuccess(false);
             setSuccessMessage('');
         }
@@ -51,7 +50,7 @@ const Header = () => {
             const { status, message } = await handleSubmit(`/logout`, {});
 
             if (status === 200) {
-                // Hiển thị swal trước
+   
                 Swal.fire({
                     title: message,
                     icon: "success",
@@ -59,7 +58,7 @@ const Header = () => {
                     showConfirmButton: true,
                     confirmButtonText: 'OK',
                     preConfirm: () => {
-                        // Sau khi ấn OK mới thực hiện các bước tiếp theo
+            
                         localStorage.removeItem('token');
                         localStorage.removeItem('user');
                         navigate('/', { replace: true });

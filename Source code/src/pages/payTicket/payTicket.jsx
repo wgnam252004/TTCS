@@ -8,8 +8,6 @@ const PayTicket = () => {
     const location = useLocation();
     const navigate = useNavigate();
     
-    // Lấy dữ liệu từ navigation state
-    // Lấy dữ liệu từ localStorage hoặc location state
     const storedData = localStorage.getItem('ticketPaymentData');
     const paymentData = storedData ? JSON.parse(storedData) : location.state;
 
@@ -22,14 +20,12 @@ const PayTicket = () => {
         showtimeData
     } = paymentData || {};
 
-    // Nếu không có dữ liệu, redirect về trang trước
     useEffect(() => {
         if (!showtimeId || !selectedSeats.length) {
             console.error("Không có dữ liệu thanh toán");
             navigate(-1);
         }
 
-        // Xóa dữ liệu khỏi localStorage sau khi đã sử dụng
         localStorage.removeItem('ticketPaymentData');
     }, [showtimeId, selectedSeats, navigate]);
 
@@ -73,26 +69,22 @@ const PayTicket = () => {
 
     const selectedSeatIds = selectedSeats.map(seat => seat.seat_id || seat.id || 'Unknown').join(', ');
 
-    // Lấy thông tin người dùng từ localStorage
     const user = JSON.parse(localStorage.getItem('user'));
     const token = localStorage.getItem('token');
 
     const handleConfirmPayment = async () => {
         try {
-            // Kiểm tra thông tin người dùng
             if (!user) {
                 throw new Error('Không tìm thấy thông tin người dùng');
             }
 
-            // Tạo đối tượng dữ liệu booking
             const bookingData = {
-                userId: user.id, // Sử dụng ID từ thông tin người dùng
+                userId: user.id, 
                 showtimeId,
                 seats: selectedSeats.map(seat => seat.seat_id || seat.id),
                 totalAmount: parseFloat(totalAmount)
             };
 
-            // Gọi API booking
             const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
             const response = await axios.post(`${API_URL}/api/bookings/create`, bookingData, {
                 headers: {
@@ -101,9 +93,7 @@ const PayTicket = () => {
             });
 
             if (response.status === 201) {
-                // Thanh toán thành công và booking đã được lưu
                 try {
-                    // Navigate to confirmation page
                     navigate('/ticket-confirmation', {
                         state: {
                             bookingId: response.data.bookingId,
@@ -117,7 +107,6 @@ const PayTicket = () => {
                     });
                 } catch (seatError) {
                     console.error('Error updating seat status:', seatError);
-                    // Even if seat status update fails, we still show success message
                     navigate('/ticket-confirmation', {
                         state: {
                             bookingId: response.data.bookingId,
@@ -157,7 +146,6 @@ const PayTicket = () => {
     return (
         <div className="payTicket__container">
             <div className="payTicket__content">
-                {/* Phần thông tin vé bên trái */}
                 <div className="payTicket__ticketSection">
 
                     <div className="payTicket__infoContainer">
@@ -191,7 +179,6 @@ const PayTicket = () => {
                                 </span>
                             </div>
                             
-                            {/* Hiển thị chi tiết từng ghế */}
                             <div className="payTicket__seatDetails">
                                 {selectedSeats.map((seat, index) => (
                                     <div key={seat.seat_id || seat.id || index} className="payTicket__seatDetail">

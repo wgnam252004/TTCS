@@ -15,7 +15,6 @@ const UserTable = () => {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [editUserId, setEditUserId] = useState(null);
 
-    // Configure axios base URL using Vite env variables
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
     axios.defaults.baseURL = API_URL;
 
@@ -102,7 +101,7 @@ const UserTable = () => {
                 const response = await axios.delete(`/api/users/${id}`);
                 if (response.status === 200) {
                     message.success('Xóa người dùng thành công');
-                    fetchUsers(); // Cập nhật danh sách người dùng
+                    fetchUsers(); 
                 } else {
                     throw new Error(response.data.message || 'Không thể xóa người dùng');
                 }

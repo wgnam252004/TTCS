@@ -11,11 +11,9 @@ const UserAddModal = ({ isOpen, onClose, onAddSuccess }) => {
 
     const handleSubmit = async (values) => {
         try {
-            // Get the latest user ID from the server
             const usersResponse = await axios.get('/api/users');
             const users = usersResponse.data;
             
-            // Find the highest ID
             let maxNumber = 0;
             users.forEach(user => {
                 const id = user.id;
@@ -27,11 +25,9 @@ const UserAddModal = ({ isOpen, onClose, onAddSuccess }) => {
                 }
             });
             
-            // Generate new ID (U0001, U0002, etc.)
             const newNumber = maxNumber + 1;
             const newId = `U${newNumber.toString().padStart(4, '0')}`;
             
-            // Prepare the data for API
             const userData = {
                 name: values.name,
                 email: values.email,
@@ -42,7 +38,6 @@ const UserAddModal = ({ isOpen, onClose, onAddSuccess }) => {
             const response = await axios.post('/api/users', userData);
             
             if (response.status === 201) {
-                // Cập nhật danh sách người dùng
                 onAddSuccess(response.data);
                 
                 Swal.fire({

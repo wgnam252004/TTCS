@@ -4,7 +4,6 @@ import './ProfilePage.css';
 import axios from 'axios';
 import ProfileInfo from '../../components/ProfileInfo/ProfileInfo';
 
-// Cấu hình API
 axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 axios.defaults.withCredentials = true;
 

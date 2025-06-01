@@ -13,12 +13,10 @@ const ProfileInfo = () => {
     const [loading, setLoading] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
 
-    // Lấy thông tin người dùng từ localStorage
     useEffect(() => {
         const storedUser = JSON.parse(localStorage.getItem('user'));
         if (storedUser) {
             setUser(storedUser);
-            // Kiểm tra xem người dùng có tồn tại không
             axios.get(`/api/users/${storedUser.id}`)
                 .then(response => {
                     if (response.status === 200) {
@@ -55,7 +53,6 @@ const ProfileInfo = () => {
             setLoading(true);
             const values = await form.validateFields();
             
-            // Gọi API cập nhật thông tin
             const response = await axios.put(`/api/users/${user.id}`, {
                 name: values.name,
                 password: values.password
@@ -63,7 +60,6 @@ const ProfileInfo = () => {
 
             if (response.status === 200) {
                 message.success('Cập nhật thông tin thành công');
-                // Cập nhật lại thông tin người dùng trong localStorage
                 const updatedUser = { ...user, name: values.name };
                 localStorage.setItem('user', JSON.stringify(updatedUser));
                 setUser(updatedUser);

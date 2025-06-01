@@ -54,7 +54,6 @@ const ResetPassword = () => {
         <div className="reset-password-container">
             <div className="reset-password-wrapper">
                 <div className="reset-password-content">
-                    {/* right wrapper */}
                     <div className="reset-password-right">
                         <h3 className="reset-password-title">
                             Đổi mật khẩu
@@ -84,7 +83,6 @@ const ResetPassword = () => {
                         </form>
                     </div>
 
-                    {/* left wrapper */}
                     <div className="reset-password-left">
                         <img src="/assets/3293465.jpg" alt="reset password" />
                     </div>

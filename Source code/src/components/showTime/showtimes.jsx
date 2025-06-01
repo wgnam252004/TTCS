@@ -18,57 +18,33 @@ const Showtime = ({ movieId, selectedDate }) => {
     useEffect(() => {
         const fetchShowtimes = async () => {
             try {
-                // Use selected date or today if none selected
                 const date = selectedDate ? selectedDate.toISOString().split('T')[0] : new Date().toISOString().split('T')[0]
-
-                // Fetch movie details
                 const movieResponse = await axios.get(`http://localhost:3000/api/movies/${movieId}`)
                 setMovie(movieResponse.data)
-
-                // Fetch all cinemas
                 const cinemasResponse = await axios.get('http://localhost:3000/api/cinemas')
                 const cinemas = cinemasResponse.data
                 setCinemas(cinemas)
-
-                // Create an array to store showtimes data
                 const cinemaShowtimes = []
-
-                // Fetch showtimes for each cinema
                 for (const cinema of cinemas) {
                     try {
-                        // Get showtimes for this cinema
                         const response = await axios.get(`http://localhost:3000/api/showtimes/movie/${movieId}`, {
                             params: {
                                 cinema_id: cinema._id,
                                 date: date
                             }
                         })
-
-                        // Log the response to debug
-                        console.log(`Showtimes for cinema ${cinema._id}:`, response.data);
-
-                        // Add showtimes to array if they exist
                         if (response.data && response.data.length > 0) {
-                            // Group showtimes by cinema_id
                             const cinemaShowtimesObj = {
                                 cinemaId: cinema._id,
                                 cinemaName: cinema.name,
                                 showtimes: response.data.filter(showtime => showtime.cinema_id === cinema._id)
                             };
-
-                            // Log filtered showtimes
-                            console.log(`Filtered showtimes for cinema ${cinema._id}:`, cinemaShowtimesObj.showtimes);
-
                             cinemaShowtimes.push(cinemaShowtimesObj);
                         }
                     } catch (error) {
                         console.error(`Error fetching showtimes for cinema ${cinema._id}:`, error)
                     }
                 }
-
-                // Log final showtimes data
-                console.log('Final showtimes data:', cinemaShowtimes);
-
                 setShowtimes(cinemaShowtimes)
                 setLoading(false)
             } catch (error) {

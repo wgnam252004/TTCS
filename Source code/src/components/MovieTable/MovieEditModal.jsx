@@ -7,7 +7,6 @@ const MovieEditModal = ({ isOpen, onClose, movieId, onSuccess }) => {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
 
-    // Configure axios base URL using Vite env variables
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
     axios.defaults.baseURL = API_URL;
 

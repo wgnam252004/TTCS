@@ -7,7 +7,7 @@ import crypto from 'crypto';
 const userRegistration = async (req, res) => {
     try {
         const { name, email, password } = req.body;
-        const isVerified = false; // Mặc định chưa xác thực
+        const isVerified = false; 
         const resetPasswordToken = null;
         const resetPasswordExpires = null;
 
@@ -19,7 +19,6 @@ const userRegistration = async (req, res) => {
             });
         }
 
-        // Lấy ID lớn nhất hiện tại
         const lastUser = await User.findOne().sort({ id: -1 });
         let newId = 'U0001';
         if (lastUser && lastUser.id) {
@@ -84,7 +83,7 @@ const userLogin = async (req, res) => {
         }
 
         const token = jwt.sign({ 
-            userId: user.id, // Sử dụng ID người dùng
+            userId: user.id,
             email: user.email 
         }, process.env.ACCESS_TOKEN, {
             expiresIn: '1h'
@@ -163,7 +162,6 @@ const userPasswordReset = async (req, res) => {
         const { token } = req.params;
         const { password } = req.body;
 
-        // Find user by reset token and check if token is still valid 
 
         const user = await User.findOne({
             resetPasswordToken: token,
@@ -263,8 +261,7 @@ const getAllUsers = async (req, res) => {
 const deleteUser = async (req, res) => {
     try {
         const { id } = req.params;
-        
-        // Kiểm tra xem người dùng có tồn tại không
+   
         const user = await User.findOne({ id });
         if (!user) {
             return res.status(404).json({
@@ -272,9 +269,9 @@ const deleteUser = async (req, res) => {
             });
         }
 
-// Không kiểm tra role là admin nữa, cho phép xóa cả admin
 
-        // Xóa người dùng
+
+     
         const result = await User.deleteOne({ id });
         
         if (result.deletedCount === 0) {
@@ -304,7 +301,7 @@ const addUser = async (req, res) => {
             role = 'User'
         } = req.body;
 
-        // Kiểm tra email đã tồn tại
+
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({
@@ -312,7 +309,7 @@ const addUser = async (req, res) => {
             });
         }
 
-        // Tạo ID mới
+      
         const lastUser = await User.findOne().sort({ id: -1 });
         let newId = 'U0001';
         if (lastUser && lastUser.id) {
@@ -320,7 +317,7 @@ const addUser = async (req, res) => {
             newId = `U${(currentId + 1).toString().padStart(4, '0')}`;
         }
 
-        // Hash mật khẩu
+    
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -330,7 +327,7 @@ const addUser = async (req, res) => {
             email,
             password: hashedPassword,
             role,
-            isVerified: true // Khi thêm từ admin thì tự động xác thực
+            isVerified: true 
         });
 
         await user.save();
@@ -348,7 +345,7 @@ const updateUser = async (req, res) => {
         const { id } = req.params;
         const updateData = req.body;
 
-        // Kiểm tra xem người dùng có tồn tại không
+    
         const user = await User.findOne({ id });
         if (!user) {
             return res.status(404).json({
@@ -356,7 +353,7 @@ const updateUser = async (req, res) => {
             });
         }
 
-        // Chỉ cho phép cập nhật name và mật khẩu
+      
         const updates = {};
         
         if (updateData.name !== undefined) {
@@ -367,14 +364,13 @@ const updateUser = async (req, res) => {
             updates.password = await bcrypt.hash(updateData.password, salt);
         }
 
-        // Cập nhật người dùng
+
         const updatedUser = await User.findOneAndUpdate(
             { id },
             updates,
             { new: true, runValidators: true }
         );
 
-        // Chỉ trả về các trường cần thiết
         const userResponse = {
             id: updatedUser.id,
             name: updatedUser.name,
@@ -405,7 +401,7 @@ const getUserById = async (req, res) => {
             });
         }
 
-        // Chỉ trả về các trường cần thiết
+ 
         const userResponse = {
             id: user.id,
             name: user.name,

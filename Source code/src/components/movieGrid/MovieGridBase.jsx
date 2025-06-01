@@ -27,13 +27,11 @@ const MovieGridBase = ({ type }) => {
     fetchMovies();
   }, [type]);
 
-  // Lấy danh sách phim cho trang hiện tại
   const currentMovies = movies.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
 
-  // Xử lý khi thay đổi trang
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };

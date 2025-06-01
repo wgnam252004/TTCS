@@ -52,12 +52,10 @@ const Register = () => {
         <div className="registerpage_wrapper_flex_center_p10">
             <div className="registerpage_container">
                 <div className="registerpage_flex_gap16_justifybetween">
-                    {/* left wrapper */}
                     <div className="registerpage_left_wrapper">
                         <img src="/assets/register.avif" alt="register" />
                     </div>
 
-                    {/* right wrapper */}
                     <div className="registerpage_right_wrapper">
                         <h3 className="registerpage_heading">
                             Đăng ký

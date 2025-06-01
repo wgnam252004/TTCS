@@ -10,7 +10,6 @@ const ShowtimeTable = () => {
     const [error, setError] = useState(null);
     const [selectedShowtime, setSelectedShowtime] = useState(null);
 
-    // Configure axios base URL using Vite env variables
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
     axios.defaults.baseURL = API_URL;
 

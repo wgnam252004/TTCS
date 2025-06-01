@@ -9,31 +9,31 @@ const CinemaAddModal = ({ isOpen, onClose, onAddSuccess }) => {
 
     const handleSubmit = async (values) => {
         try {
-            // Get the latest cinema ID from the server
+     
             const cinemasResponse = await axios.get('http://localhost:3000/api/cinemas');
             const cinemas = cinemasResponse.data;
             
-            // Find the highest ID - handle cases where IDs might not follow C0001 pattern
+        
             let maxNumber = 0;
             const validIds = cinemas.filter(cinema => cinema._id && cinema._id.startsWith('C'));
             
             if (validIds.length === 0) {
-                maxNumber = 0; // Start from C0001 if no valid IDs found
+                maxNumber = 0; 
             } else {
                 const numbers = validIds.map(cinema => parseInt(cinema._id.substring(1)));
                 maxNumber = Math.max(...numbers);
             }
             
-            // Generate new ID (C0001, C0002, etc.)
+
             const newNumber = maxNumber + 1;
             const newId = `C${newNumber.toString().padStart(4, '0')}`;
             
-            // Validate ID format
+
             if (!newId.startsWith('C') || newId.length !== 5) {
                 throw new Error('ID không đúng định dạng. ID phải bắt đầu bằng C và có 5 ký tự.');
             }
             
-            // Prepare the data for API
+    
             const cinemaData = {
                 _id: newId,
                 name: values.name,
@@ -46,7 +46,7 @@ const CinemaAddModal = ({ isOpen, onClose, onAddSuccess }) => {
             const response = await axios.post('http://localhost:3000/api/cinemas', cinemaData);
             
             if (response.status === 201) {
-                // Gọi callback để cập nhật danh sách rạp
+          
                 onAddSuccess(response.data);
                 
                 Swal.fire({

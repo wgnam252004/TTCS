@@ -12,11 +12,10 @@ const MovieSliderBase = ({ type, id = 'defaultSlider' }) => {
   const sliderRef = useRef(null);
   const trackRef = useRef(null);
   const containerRef = useRef(null);
-  const itemWidth = 264; // Chiều rộng mỗi item
+  const itemWidth = 264; 
   const [itemsPerPage, setItemsPerPage] = useState(4);
   const maxIndex = movies.length;
 
-  // Lấy dữ liệu từ API
   useEffect(() => {
     const fetchMovies = async () => {
       try {
@@ -24,8 +23,8 @@ const MovieSliderBase = ({ type, id = 'defaultSlider' }) => {
         setMovies(response.data.map(movie => ({
           title: movie.title,
           category: movie.genre,
-          image: movie.small_img, // Sử dụng small_img
-          id: movie._id // Make sure to include the movie ID
+          image: movie.small_img, 
+          id: movie._id 
         })));
       } catch (error) {
         console.error(`Error fetching movies:`, error);
@@ -35,7 +34,6 @@ const MovieSliderBase = ({ type, id = 'defaultSlider' }) => {
     fetchMovies();
   }, [type]);
 
-  // Cập nhật itemsPerPage dựa trên kích thước container
   useEffect(() => {
     const updateItemsPerPage = () => {
       if (containerRef.current) {
@@ -44,16 +42,14 @@ const MovieSliderBase = ({ type, id = 'defaultSlider' }) => {
       }
     };
 
-    updateItemsPerPage(); // Chạy ngay khi component mount
+    updateItemsPerPage(); 
     window.addEventListener('resize', updateItemsPerPage);
 
     return () => window.removeEventListener('resize', updateItemsPerPage);
   }, [itemWidth]);
 
-  // Tạo mảng phim mở rộng cho hiệu ứng infinite
   const extendedMovies = [...movies, ...movies.slice(0, itemsPerPage)];
 
-  // Xử lý khi đến slide cuối
   useEffect(() => {
     if (currentIndex >= maxIndex) {
       const timeout = setTimeout(() => {
@@ -71,7 +67,6 @@ const MovieSliderBase = ({ type, id = 'defaultSlider' }) => {
     }
   }, [currentIndex, maxIndex]);
 
-  // Tự động chuyển slide
   useEffect(() => {
     let interval;
     if (isAutoPlaying && !isHovering) {

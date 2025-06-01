@@ -28,11 +28,11 @@ const CinemaShowtimes = ({ cinemaId }) => {
             try {
                 console.log('Fetching showtimes for cinema:', cinemaId);
                 
-                // Use selected date or today if none selected
+       
                 const date = selectedDate ? selectedDate.toISOString().split('T')[0] : new Date().toISOString().split('T')[0]
                 console.log('Date:', date);
 
-                // Fetch showtimes for the selected cinema
+          
                 const response = await axios.get(`http://localhost:3000/api/cinemaShowtimes/cinema/${cinemaId}`, {
                     params: {
                         date: date
@@ -40,7 +40,7 @@ const CinemaShowtimes = ({ cinemaId }) => {
                 });
                 console.log('Raw showtimes response:', response.data);
 
-                // If we have showtimes, group them by movie
+    
                 if (response.data && response.data.length > 0) {
                     const movieShowtimes = response.data.reduce((acc, showtime) => {
                         const movieId = showtime.movie_id;
@@ -55,7 +55,7 @@ const CinemaShowtimes = ({ cinemaId }) => {
                     }, {});
                     console.log('Movie showtimes grouped:', movieShowtimes);
 
-                    // Convert to array and add movie details
+        
                     const showtimesWithMovies = await Promise.all(
                         Object.values(movieShowtimes).map(async movieShowtimes => {
                             try {
@@ -73,7 +73,7 @@ const CinemaShowtimes = ({ cinemaId }) => {
                     );
                     console.log('Final showtimes with movies:', showtimesWithMovies);
 
-                    // Filter out any null results from failed movie fetches
+              
                     const validShowtimes = showtimesWithMovies.filter(Boolean);
                     setShowtimes(validShowtimes);
                 } else {

@@ -5,7 +5,7 @@ import { useAuth } from "../authContext/authContext";
 const PrivateRoute = ({ children, adminOnly = false, userOnly = false }) => {
     const { isAuthenticated, canAccessAdmin, canAccessProfile } = useAuth();
 
-    // Kiểm tra điều kiện truy cập
+
     if (!isAuthenticated) {
         return <Navigate to="/login" replace />;
     }

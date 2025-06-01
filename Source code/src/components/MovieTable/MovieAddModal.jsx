@@ -12,11 +12,9 @@ const AddMovieModal = ({ isOpen, onClose, onAddSuccess }) => {
 
     const handleSubmit = async (values) => {
         try {
-            // Get the latest movie ID from the server
             const moviesResponse = await axios.get('http://localhost:3000/api/movies');
             const movies = moviesResponse.data;
             
-            // Find the highest ID
             let maxNumber = 0;
             movies.forEach(movie => {
                 const id = movie._id;
@@ -28,20 +26,16 @@ const AddMovieModal = ({ isOpen, onClose, onAddSuccess }) => {
                 }
             });
             
-            // Generate new ID (M0020, M0021, etc.)
             const newNumber = maxNumber + 1;
             const newId = `M${newNumber.toString().padStart(4, '0')}`;
             
-            // Convert status to match API requirements
             const statusMap = {
                 'now-showing': 'Phim đang chiếu',
                 'coming-soon': 'Phim sắp chiếu'
             };
             
-            // Format the date
             const formattedDate = values.releaseDate.format('YYYY-MM-DD');
             
-            // Prepare the data for API
             const movieData = {
                 _id: newId,
                 title: values.title,
@@ -58,13 +52,11 @@ const AddMovieModal = ({ isOpen, onClose, onAddSuccess }) => {
                 video_url: values.video_url
             };
 
-            // Log the data being sent to API
             console.log('Sending movie data:', movieData);
 
             const response = await axios.post('http://localhost:3000/api/movies', movieData);
             
             if (response.status === 201) {
-                // Cập nhật danh sách phim
                 onAddSuccess(response.data);
                 
                 Swal.fire({

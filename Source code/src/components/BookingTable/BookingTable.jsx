@@ -10,7 +10,7 @@ const BookingTable = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Configure axios base URL using Vite env variables
+
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
     axios.defaults.baseURL = API_URL;
 
@@ -103,7 +103,7 @@ const BookingTable = () => {
                 
                 if (response.status === 200) {
                     message.success('Xóa vé thành công');
-                    fetchBookings(); // Cập nhật danh sách vé
+                    fetchBookings(); 
                 } else {
                     throw new Error(response.data.message);
                 }

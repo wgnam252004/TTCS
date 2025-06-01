@@ -48,7 +48,6 @@ const VerifyEmail = () => {
     <div className="verify-email-container">
       <div className="verify-email-wrapper">
         <div className="verify-email-content">
-          {/* right wrapper */}
           <div className="verify-email-right">
             <h3 className="verify-email-title">
               Xác thực Email
@@ -66,7 +65,6 @@ const VerifyEmail = () => {
             </form>
           </div>
 
-          {/* left wrapper */}
           <div className="verify-email-left">
             <img src="/assets/6310507.jpg" alt="verify email" />
           </div>

@@ -6,7 +6,7 @@ import axios from 'axios'
 const CinemaInfo = ({ cinemaId }) => {
     const { cinemaId: urlCinemaId } = useParams();
     
-    // Use cinemaId from prop if provided, otherwise use URL parameter
+
     const cinemaIdToUse = cinemaId || urlCinemaId;
     const [cinema, setCinema] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -38,7 +38,7 @@ const CinemaInfo = ({ cinemaId }) => {
         };
 
         fetchCinemaDetails();
-    }, [cinemaIdToUse]); // Changed dependency to cinemaIdToUse
+    }, [cinemaIdToUse]); 
 
     if (loading) {
         console.log('CinemaInfo still loading...');

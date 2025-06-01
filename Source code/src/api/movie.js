@@ -4,12 +4,11 @@ import Movie from '../models/Movie.js';
 
 
 
-// API lấy danh sách phim đang chiếu
 router.get('/now-showing', async (req, res) => {
     try {
         const movies = await Movie.find({
             status: 'Phim đang chiếu',
-            small_img: { $exists: true, $ne: null }, // Chỉ lấy phim có ảnh small_img
+            small_img: { $exists: true, $ne: null }
         });
         res.json(movies);
     } catch (error) {
@@ -18,12 +17,11 @@ router.get('/now-showing', async (req, res) => {
     }
 });
 
-// API lấy danh sách phim sắp chiếu
 router.get('/coming-soon', async (req, res) => {
     try {
         const movies = await Movie.find({
             status: 'Phim sắp chiếu',
-            small_img: { $exists: true, $ne: null }, // Chỉ lấy phim có ảnh small_img
+            small_img: { $exists: true, $ne: null }
         });
         res.json(movies);
     } catch (error) {
@@ -32,7 +30,6 @@ router.get('/coming-soon', async (req, res) => {
     }
 });
 
-// API lấy danh sách tất cả các phim
 router.get('/', async (req, res) => {
     try {
         const movies = await Movie.find();
@@ -44,7 +41,6 @@ router.get('/', async (req, res) => {
 
 
 
-// API thêm phim mới
 router.post('/', async (req, res) => {
     try {
         const { 
@@ -62,9 +58,6 @@ router.post('/', async (req, res) => {
             small_img,
             video_url
         } = req.body;
-
-        // Kiểm tra các trường bắt buộc
-        // Kiểm tra các trường bắt buộc
         const requiredFields = ['title', 'description', 'classify', 'director', 'genre', 'releaseDate', 'duration', 'language', 'status'];
         const missingFields = requiredFields.filter(field => !req.body[field]);
         
@@ -74,8 +67,6 @@ router.post('/', async (req, res) => {
                 required_fields: missingFields
             });
         }
-
-        // Kiểm tra định dạng ngày
         if (releaseDate) {
             const date = new Date(releaseDate);
             if (isNaN(date.getTime())) {
@@ -85,38 +76,28 @@ router.post('/', async (req, res) => {
                 });
             }
         }
-
-        // Log the incoming data
         console.log('Received movie data:', req.body);
-
         try {
-            // Tạo đối tượng phim mới
             const movie = new Movie(req.body);
-            
-            // Lưu vào database
             const savedMovie = await movie.save();
-            
             res.status(201).json({
                 message: 'Movie added successfully',
                 movie: savedMovie
             });
         } catch (error) {
             console.error('Error saving movie:', error);
-            // Check if it's a validation error
             if (error.name === 'ValidationError') {
                 return res.status(400).json({
                     message: 'Validation failed',
                     errors: error.errors
                 });
             }
-            // Check if it's a duplicate key error
             if (error.code === 11000) {
                 return res.status(400).json({
                     message: 'Duplicate movie ID',
                     field: '_id'
                 });
             }
-            // Return generic error
             throw error;
         }
     } catch (error) {
@@ -124,21 +105,15 @@ router.post('/', async (req, res) => {
     }
 });
 
-// API tìm kiếm phim theo tiêu đề
-// API xóa phim
 router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        
-        // Tìm và xóa phim
         const movie = await Movie.findByIdAndDelete(id);
-        
         if (!movie) {
             return res.status(404).json({
                 message: 'Movie not found'
             });
         }
-        
         res.status(200).json({
             message: 'Movie deleted successfully',
             movie
@@ -148,21 +123,16 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-// API tìm kiếm phim theo tiêu đề
-// API lấy 5 bộ phim đang chiếu có ngày phát hành gần nhất và có ảnh hero_img
 router.get('/recent', async (req, res) => {
     try {
         const currentDate = new Date();
-        
-        // Lấy 5 phim đang chiếu có ngày phát hành gần nhất và có ảnh hero_img
         const movies = await Movie.find({
             status: 'Phim đang chiếu',
             releaseDate: { $lte: currentDate },
-            hero_img: { $exists: true, $ne: null } // Kiểm tra hero_img tồn tại và không null
+            hero_img: { $exists: true, $ne: null }
         })
-        .sort({ releaseDate: -1 }) // Sắp xếp giảm dần theo ngày phát hành
-        .limit(5); // Giới hạn 5 phim
-        
+        .sort({ releaseDate: -1 })
+        .limit(5);
         res.json(movies);
     } catch (error) {
         console.error('Error fetching recent movies:', error);
@@ -170,28 +140,22 @@ router.get('/recent', async (req, res) => {
     }
 });
 
-// API tìm kiếm phim theo tiêu đề
-// API chỉnh sửa phim
+
 router.put('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const updateData = req.body;
-
-        // Kiểm tra xem phim có tồn tại không
         const movie = await Movie.findById(id);
         if (!movie) {
             return res.status(404).json({
                 message: 'Movie not found'
             });
         }
-
-        // Cập nhật phim
         const updatedMovie = await Movie.findByIdAndUpdate(
             id,
             updateData,
             { new: true, runValidators: true }
         );
-
         res.status(200).json({
             message: 'Movie updated successfully',
             movie: updatedMovie
@@ -201,7 +165,7 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// API lấy 5 phim đang chiếu gần nhất
+
 router.get('/recent', async (req, res) => {
     try {
         const currentDate = new Date();
@@ -209,8 +173,8 @@ router.get('/recent', async (req, res) => {
             status: 'Phim đang chiếu',
             releaseDate: { $lte: currentDate }
         })
-        .sort({ releaseDate: -1 }) // Sắp xếp giảm dần theo ngày phát hành
-        .limit(5); // Giới hạn 5 phim
+        .sort({ releaseDate: -1 }) 
+        .limit(5); 
         
         res.json(movies);
     } catch (error) {
@@ -218,13 +182,12 @@ router.get('/recent', async (req, res) => {
     }
 });
 
-// API tìm kiếm phim theo tiêu đề
-// API lấy thông tin chi tiết của một phim
+
 router.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         
-        // Tìm phim theo ID
+ 
         const movie = await Movie.findById(id);
         
         if (!movie) {
@@ -239,7 +202,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// API tìm kiếm phim theo tiêu đề
+
 router.get('/search', async (req, res) => {
     try {
         const { title } = req.query;
