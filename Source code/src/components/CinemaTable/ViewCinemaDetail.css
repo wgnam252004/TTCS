@@ -1,0 +1,24 @@
+.cinema-detail-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.cinema-image {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.ant-descriptions-item-label {
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.ant-descriptions-item-content {
+    color: rgba(0, 0, 0, 0.65);
+}

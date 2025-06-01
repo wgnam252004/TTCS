@@ -2,32 +2,7 @@ import express from 'express';
 const router = express.Router();
 import Movie from '../models/Movie.js';
 
-// Endpoint để thêm dữ liệu thử nghiệm
-router.post('/seed', async (req, res) => {
-    try {
-        const sampleMovie = {
-            _id: "M0001",
-            title: "PORORO: THÁM HIỂM ĐẠI DƯƠNG XANH",
-            description: "Chú chim cánh cụt đáng yêu Pororo và những người bạn cùng nhau khám ph…",
-            classify: "Phim phổ biến với mọi độ tuổi",
-            director: "Yoon Ye-Wan",
-            genre: "Family",
-            releaseDate: new Date("2025-04-04"),
-            duration: 71,
-            language: "Phụ đề/Lồng tiếng",
-            status: "Phim đang chiếu",
-            hero_img: "https://res.cloudinary.com/djqx7zem1/image/upload/v1746847607/pororo-h…",
-            small_img: "https://res.cloudinary.com/djqx7zem1/image/upload/v1746847607/pororo-s…",
-            video_url: "rTsV2tzDv6Y"
-        };
-        
-        const movie = new Movie(sampleMovie);
-        await movie.save();
-        res.json({ message: "Sample movie added successfully", movie });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
+
 
 // API lấy danh sách phim đang chiếu
 router.get('/now-showing', async (req, res) => {
@@ -35,7 +10,6 @@ router.get('/now-showing', async (req, res) => {
         const movies = await Movie.find({
             status: 'Phim đang chiếu',
             small_img: { $exists: true, $ne: null }, // Chỉ lấy phim có ảnh small_img
-            releaseDate: { $lte: new Date() } // Chỉ lấy phim có ngày phát hành không quá ngày hiện tại
         });
         res.json(movies);
     } catch (error) {
@@ -50,7 +24,6 @@ router.get('/coming-soon', async (req, res) => {
         const movies = await Movie.find({
             status: 'Phim sắp chiếu',
             small_img: { $exists: true, $ne: null }, // Chỉ lấy phim có ảnh small_img
-            releaseDate: { $gt: new Date() } // Chỉ lấy phim có ngày phát hành sau ngày hiện tại
         });
         res.json(movies);
     } catch (error) {
@@ -91,23 +64,61 @@ router.post('/', async (req, res) => {
         } = req.body;
 
         // Kiểm tra các trường bắt buộc
-        if (!title || !director || !genre || !releaseDate || !duration || !status || !hero_img || !small_img || !video_url) {
+        // Kiểm tra các trường bắt buộc
+        const requiredFields = ['title', 'description', 'classify', 'director', 'genre', 'releaseDate', 'duration', 'language', 'status'];
+        const missingFields = requiredFields.filter(field => !req.body[field]);
+        
+        if (missingFields.length > 0) {
             return res.status(400).json({
                 message: 'Missing required fields',
-                required_fields: ['title', 'director', 'genre', 'releaseDate', 'duration', 'status', 'hero_img', 'small_img', 'video_url']
+                required_fields: missingFields
             });
         }
 
-        // Tạo đối tượng phim mới
-        const movie = new Movie(req.body);
-        
-        // Lưu vào database
-        const savedMovie = await movie.save();
-        
-        res.status(201).json({
-            message: 'Movie added successfully',
-            movie: savedMovie
-        });
+        // Kiểm tra định dạng ngày
+        if (releaseDate) {
+            const date = new Date(releaseDate);
+            if (isNaN(date.getTime())) {
+                return res.status(400).json({
+                    message: 'Invalid date format',
+                    field: 'releaseDate'
+                });
+            }
+        }
+
+        // Log the incoming data
+        console.log('Received movie data:', req.body);
+
+        try {
+            // Tạo đối tượng phim mới
+            const movie = new Movie(req.body);
+            
+            // Lưu vào database
+            const savedMovie = await movie.save();
+            
+            res.status(201).json({
+                message: 'Movie added successfully',
+                movie: savedMovie
+            });
+        } catch (error) {
+            console.error('Error saving movie:', error);
+            // Check if it's a validation error
+            if (error.name === 'ValidationError') {
+                return res.status(400).json({
+                    message: 'Validation failed',
+                    errors: error.errors
+                });
+            }
+            // Check if it's a duplicate key error
+            if (error.code === 11000) {
+                return res.status(400).json({
+                    message: 'Duplicate movie ID',
+                    field: '_id'
+                });
+            }
+            // Return generic error
+            throw error;
+        }
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

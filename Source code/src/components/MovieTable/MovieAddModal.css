@@ -1,0 +1,23 @@
+.movie-description {
+    height: 150px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.date-picker-full-width {
+    width: 100%;
+}
+
+.ant-input-number,
+.ant-select,
+.ant-input {
+    width: 100%;
+}
+
+.modal-title {
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+    color: #7F6DF8;
+}
+

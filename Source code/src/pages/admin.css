@@ -1,0 +1,347 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+/* Sidebar container */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 260px;
+    background: #7F6DF8;
+    padding: 20px;
+    transition: all 0.3s ease;
+    z-index: 100;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Active state of sidebar */
+.sidebar.active {
+    width: 80px;
+}
+
+.links_name {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.sidebar.active .links_name {
+    display: none;
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+/* Logo content */
+.logo_content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.logo-container {
+    height: 60px;
+    width: 200px;
+    overflow: hidden;
+}
+
+.logo-container img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+
+
+/* Navigation list */
+.nav_list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav_list li {
+    margin-bottom: 15px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 8px;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    gap: 14px;
+    width: 100%;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: visible;
+}
+
+/* Show tooltip only when sidebar is collapsed */
+.sidebar.active .nav-link::after {
+    content: attr(title);
+    position: absolute;
+    left: 135%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #fff;
+    color: #7F6DF8;
+    padding: 8px 8px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.sidebar.active .nav-link:hover::after {
+    opacity: 1;
+}
+
+/* Hide browser default tooltip */
+.nav-link {
+    &[title] {
+        cursor: pointer;
+    }
+    &[title]:hover {
+        cursor: pointer;
+    }
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateX(8px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link:hover::before {
+    opacity: 1;
+}
+
+.nav-link i {
+    font-size: 22px;
+    color: white;
+    transition: all 0.3s ease;
+    transform: scale(1);
+}
+
+.nav-link:hover i {
+    transform: scale(1.1);
+}
+
+.nav-link .links_name {
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    letter-spacing: 0.3px;
+}
+
+.nav-link:hover .links_name {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.sidebar.active .nav-link .links_name {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-10px);
+}
+
+/* Active menu item */
+.nav-link.active {
+    background: #fff;
+    color: #7F6DF8;
+    border-color: #7F6DF8;
+    box-shadow: 0 4px 15px rgba(127, 109, 248, 0.2);
+}
+
+.nav-link.active i {
+    color: #7F6DF8;
+    transform: scale(1.1);
+}
+
+.nav-link.active .links_name {
+    color: #7F6DF8;
+}
+
+/* Toggle button */
+#btn {
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: transparent;
+    border: none;
+    padding: 8px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+#btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar.active #btn {
+    transform: rotate(-180deg);
+}
+
+/* Content container */
+.content-con {
+    margin-left: 260px;
+    transition: all 0.3s ease;
+    padding: 0 0 0 20px;
+    width: calc(100vw - 260px - 40px); /* Subtract extra padding */
+    min-height: 100vh;
+    background: #F5EFFF;
+    box-sizing: border-box;
+}
+
+.sidebar.active ~ .content-con {
+    margin-left: 80px;
+    width: calc(100vw - 80px - 40px);
+}
+
+/* Add table styles */
+.content-con .ant-table {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    overflow: visible;
+    box-sizing: border-box;
+}
+
+.content-con .ant-table-container {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    overflow: visible;
+    box-sizing: border-box;
+}
+
+/* Add a wrapper div for the table */
+.content-con .table-wrapper {
+    width: 100%;
+    margin-top: 20px;
+    overflow-x: auto;
+    box-sizing: border-box;
+}
+
+.content-con .ant-table-thead > tr > th,
+.content-con .ant-table-tbody > tr > td {
+    white-space: normal;
+    padding: 8px 8px;
+    text-overflow: clip;
+    overflow: visible;
+    word-wrap: break-word;
+    line-height: 1.5;
+    min-height: 40px;
+    max-height: 90px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.content-con .ant-table-thead > tr > th {
+    background: #7F6DF8;
+    color: white;
+    font-weight: 600;
+    text-align: left;
+    white-space: nowrap;
+    display: table-cell;
+}
+
+.content-con .ant-table-tbody > tr > td {
+    background: white;
+    text-align: left;
+    display: table-cell;
+}
+
+.content-con .ant-table-tbody > tr:hover > td {
+    background: #f5f5f5;
+}
+
+/* Adjust column widths to match content */
+.content-con .ant-table-thead > tr > th {
+    min-width: 20px;
+    max-width: 150px;
+    width: auto;
+}
+
+.content-con .ant-table-tbody > tr > td {
+    min-width: 20px;
+    max-width: 150px;
+    width: auto;
+}
+
+/* Style for action buttons */
+.content-con .action-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.content-con .ant-btn-small {
+    padding: 4px 8px;
+}
+
+
+
+.content-con .ant-btn-danger {
+    background: red;
+    color: #fff;
+}
+
+
+/* Special styling for description column */
+.content-con .ant-table-thead > tr > th[data-index="description"],
+.content-con .ant-table-tbody > tr > td[data-index="description"] {
+    min-width: 200px;
+    max-width: 400px;
+    width: auto;
+}
+
+/* Content header */
+.content-header {
+    margin-bottom: 30px;
+}
+
+.page-title {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Content body */
+.content-body {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}

@@ -38,12 +38,21 @@ import movieRoutes from './api/movie.js';
 import cinemaRoutes from './api/cinema.js';
 import roomRoutes from './api/room.js';
 import showtimeRoutes from './api/showtime.js';
+import cinemaShowtimesRoutes from './api/cinemaShowtimes.js';
+import userRoutes from './routes/userRoutes.js';
+
 
 
 app.use('/api/movies', movieRoutes);
 app.use('/api/cinemas', cinemaRoutes);
 app.use('/api/rooms', roomRoutes);
 app.use('/api/showtimes', showtimeRoutes);
+app.use('/api/cinemaShowtimes', cinemaShowtimesRoutes);
+app.use('/api/users', userRoutes);
+
+// Booking routes
+import bookingRoutes from './routes/bookingRoutes.js';
+app.use('/api/bookings', bookingRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, async () => {

@@ -60,10 +60,10 @@ const Register = () => {
                     {/* right wrapper */}
                     <div className="registerpage_right_wrapper">
                         <h3 className="registerpage_heading">
-                            Register
+                            Đăng ký
                         </h3>
                         <p className="registerpage_subtext">
-                            Let's get you all set up so you can access your personal account
+                            Chúng tôi sẽ thiết lập tất cả để bạn có thể truy cập vào tài khoản cá nhân của mình.
                         </p>
 
                         <form className="registerpage_form_wrapper" onSubmit={handleRegister}>
@@ -71,33 +71,33 @@ const Register = () => {
                                 type="text"
                                 ref={nameRef}
                                 className="registerpage_input"
-                                placeholder="Your Name....."
+                                placeholder="Tên của bạn....."
                                 required
                             />
                             <input
                                 type="email"
                                 ref={emailRef}
                                 className="registerpage_input"
-                                placeholder="Your Email....."
+                                placeholder="Email....."
                                 required
                             />
                             <input
                                 type="password"
                                 ref={passwordRef}
                                 className="registerpage_input"
-                                placeholder="Your Password....."
+                                placeholder="Mật khẩu....."
                                 required
                             />
 
                             <button className="registerpage_button">
-                                Create Account
+                                Tạo tài khoản
                             </button>
                         </form>
 
                         <p className="registerpage_login_text">
-                            Already have an account?{' '}
+                            Bạn đã có tài khoản?{' '}
                             <Link to="/login" className="registerpage_login_link">
-                                Login
+                                Đăng nhập
                             </Link>
                         </p>
                     </div>

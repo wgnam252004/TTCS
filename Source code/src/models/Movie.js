@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 const movieSchema = new mongoose.Schema({
     _id: {
         type: String,
-        required: true
     },
     title: {
         type: String,
@@ -43,7 +42,6 @@ const movieSchema = new mongoose.Schema({
     },
     hero_img: {
         type: String,
-        required: true
     },
     small_img: {
         type: String,

@@ -1,46 +1,118 @@
 .ticketBooking__seatMapContainer {
-    width: 550px;
-    height: 320px;
-    background-color: #f5f5f7;
+    padding: 20px;
+    background-color: #ffffff;
     border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
     box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .ticketBooking__seatGrid {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    gap: 6px;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .ticketBooking__seat {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #505050;
+}
+
+.ticketBooking__screen {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.ticketBooking__screenText {
+    background: linear-gradient(45deg, #333, #666);
     color: white;
-    border: none;
-    border-radius: 6px;
+    padding: 10px 50px;
+    border-radius: 50px;
+    display: inline-block;
     font-weight: bold;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.ticketBooking__seatGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.ticketBooking__seatRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ticketBooking__rowLabel {
+    width: 30px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+}
+
+.ticketBooking__rowSeats {
+    display: flex;
+    gap: 8px;
+}
+
+.ticketBooking__seat {
+    width: 35px;
+    height: 35px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background: transparent;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    font-size: 0.9rem;
-  }
-  
-  .ticketBooking__seat:hover {
-    background-color: #636363;
-  }
-  
-  .ticketBooking__seat--selected {
-    background-color: #7F6DF8;
-  }
-  
-  .ticketBooking__seat--selected:hover {
-    background-color: #6a5add;
-  }
-  
+    font-size: 12px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ticketBooking__seat--available {
+    border-color: #4caf50;
+    color: #2e7d32;
+}
+
+.ticketBooking__seat--available:hover {
+    background: #c8e6c9;
+    transform: scale(1.1);
+}
+
+.ticketBooking__seat--selected {
+    background: #7F6DF8;
+    border-color: #7F6DF8;
+    color: white;
+    transform: scale(1.1);
+}
+
+.ticketBooking__seat--selected:hover {
+    background: #6B5CF0;
+    border-color: #6B5CF0;
+}
+
+.ticketBooking__seat--booked {
+    background: #f44336;
+    border-color: #f44336;
+    color: white;
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+.ticketBooking__legend {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.ticketBooking__legendItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ticketBooking__legendItem span {
+    font-size: 14px;
+    color: #666;
+}
+
+

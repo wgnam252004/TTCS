@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react"
 import './showtimes.css'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
+import { useContext } from 'react'
+import AuthContext from '../../authContext/authContext.jsx';
 
 const Showtime = ({ movieId, selectedDate }) => {
     const [cinemas, setCinemas] = useState([])
@@ -9,6 +11,9 @@ const Showtime = ({ movieId, selectedDate }) => {
     const [showtimes, setShowtimes] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+    const navigate = useNavigate();
+    const authContext = useContext(AuthContext);
+    const { token } = authContext;
 
     useEffect(() => {
         const fetchShowtimes = async () => {
@@ -114,21 +119,27 @@ const Showtime = ({ movieId, selectedDate }) => {
                             </div>
                             <div className="showtime-buttons">
                                 {cinemaShowtimes.showtimes.map((showtime) => (
-                                    <Link 
-                                        to={`/bookingChair/${showtime._id}`} 
+                                    <button 
                                         key={showtime._id}
-                                        state={{
-                                            showtimeId: showtime._id,
-                                            movieId: movieId,
-                                            cinemaId: cinema._id,
-                                            roomId: showtime.room_id,
-                                            price: showtime.base_price
+                                        className="showtime-btn"
+                                        onClick={() => {
+                                            if (!token) {
+                                                navigate('/login', { state: { returnUrl: `/bookingChair/${showtime._id}` } });
+                                            } else {
+                                                navigate(`/bookingChair/${showtime._id}`, {
+                                                    state: {
+                                                        showtimeId: showtime._id,
+                                                        movieId: movieId,
+                                                        cinemaId: cinema._id,
+                                                        roomId: showtime.room_id,
+                                                        price: showtime.base_price
+                                                    }
+                                                });
+                                            }
                                         }}
                                     >
-                                        <button className="showtime-btn">
-                                            {new Date(showtime.start_time).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}
-                                        </button>
-                                    </Link>
+                                        {new Date(showtime.start_time).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}
+                                    </button>
                                 ))}
                             </div>
                         </div>

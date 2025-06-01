@@ -1,0 +1,50 @@
+.user-add-form {
+    padding: 20px;
+}
+
+.user-add-form .ant-form-item-label {
+    font-weight: 500;
+    color: #333;
+}
+
+.user-add-form .ant-form-item-control-wrapper {
+    margin-bottom: 20px;
+}
+
+.user-add-form .ant-input,
+.user-add-form .ant-select-selector {
+    border-radius: 8px;
+    padding: 8px 12px;
+    height: 40px;
+}
+
+.user-add-form .ant-input-password {
+    border-radius: 8px;
+    padding: 8px 12px;
+    height: 40px;
+}
+
+.user-add-form .ant-btn-primary {
+    background-color: #7F6DF8;
+    border-color: #7F6DF8;
+    border-radius: 8px;
+    padding: 8px 24px;
+    font-weight: 500;
+}
+
+.user-add-form .ant-btn-primary:hover {
+    background-color: #6B5CF0;
+    border-color: #6B5CF0;
+}
+
+.user-add-form .ant-form-item-explain-error {
+    color: #f5222d;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.user-add-form .ant-form-item-explain-success {
+    color: #52c41a;
+    font-size: 12px;
+    margin-top: 4px;
+}

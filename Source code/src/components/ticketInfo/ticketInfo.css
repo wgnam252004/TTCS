@@ -1,7 +1,7 @@
 /* Ticket Information Container */
 .ticketBooking__infoContainer {
     width: 400px;
-    height: 320px;
+    height: auto;
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -9,8 +9,15 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    flex: 1;
   }
   
+
+  .ticketBooking__seatDetail {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
   .ticketBooking__infoHeader {
     margin-bottom: 16px;
   }

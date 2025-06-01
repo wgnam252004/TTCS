@@ -1,12 +1,15 @@
 import bcrypt from 'bcryptjs';
-import { User } from '../models/User.js';
+import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import { sendEmail } from '../utils/sendEmail.js';
 import crypto from 'crypto';
 
 const userRegistration = async (req, res) => {
     try {
-        const { name, email, password, isVerified, resetPasswordToken, resetPasswordExpires } = req.body;
+        const { name, email, password } = req.body;
+        const isVerified = false; // Mặc định chưa xác thực
+        const resetPasswordToken = null;
+        const resetPasswordExpires = null;
 
         let user = await User.findOne({ email });
 
@@ -16,9 +19,16 @@ const userRegistration = async (req, res) => {
             });
         }
 
+        // Lấy ID lớn nhất hiện tại
+        const lastUser = await User.findOne().sort({ id: -1 });
+        let newId = 'U0001';
+        if (lastUser && lastUser.id) {
+            const currentId = parseInt(lastUser.id.replace('U', ''));
+            newId = `U${(currentId + 1).toString().padStart(4, '0')}`;
+        }
+
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
-
         const verificationToken = crypto.randomBytes(32).toString('hex');
 
         user = new User({
@@ -28,7 +38,9 @@ const userRegistration = async (req, res) => {
             isVerified,
             verificationToken,
             resetPasswordToken,
-            resetPasswordExpires
+            resetPasswordExpires,
+            id: newId,
+            role: 'User'
         });
 
         await user.save();
@@ -71,7 +83,10 @@ const userLogin = async (req, res) => {
             })
         }
 
-        const token = jwt.sign({ userId: user?._id, userEmail: user?.email }, process.env.ACCESS_TOKEN, {
+        const token = jwt.sign({ 
+            userId: user.id, // Sử dụng ID người dùng
+            email: user.email 
+        }, process.env.ACCESS_TOKEN, {
             expiresIn: '1h'
         });
 
@@ -81,7 +96,13 @@ const userLogin = async (req, res) => {
             samesite: 'strict'
         }).status(200).json({
             message: 'Đăng nhập thành công',
-            token
+            token,
+            user: {
+                id: user.id,
+                email: user.email,
+                name: user.name,
+                role: user.role
+            }
         })
 
     } catch (error) {
@@ -230,4 +251,187 @@ const userLogout = async (req, res) => {
     }
 }
 
-export { userRegistration, userLogin, userPasswordForget, userPasswordReset, userVerifyEmail, userLogout };
+const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find({});
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+const deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        
+        // Kiểm tra xem người dùng có tồn tại không
+        const user = await User.findOne({ id });
+        if (!user) {
+            return res.status(404).json({
+                message: 'Người dùng không tồn tại'
+            });
+        }
+
+// Không kiểm tra role là admin nữa, cho phép xóa cả admin
+
+        // Xóa người dùng
+        const result = await User.deleteOne({ id });
+        
+        if (result.deletedCount === 0) {
+            return res.status(404).json({
+                message: 'Không thể xóa người dùng'
+            });
+        }
+        
+        res.status(200).json({
+            message: 'Người dùng đã được xóa thành công'
+        });
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        res.status(500).json({
+            message: 'Lỗi khi xóa người dùng',
+            error: error.message
+        });
+    }
+};
+
+const addUser = async (req, res) => {
+    try {
+        const { 
+            name,
+            email,
+            password,
+            role = 'User'
+        } = req.body;
+
+        // Kiểm tra email đã tồn tại
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({
+                message: 'Email đã được sử dụng'
+            });
+        }
+
+        // Tạo ID mới
+        const lastUser = await User.findOne().sort({ id: -1 });
+        let newId = 'U0001';
+        if (lastUser && lastUser.id) {
+            const currentId = parseInt(lastUser.id.replace('U', ''));
+            newId = `U${(currentId + 1).toString().padStart(4, '0')}`;
+        }
+
+        // Hash mật khẩu
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        const user = new User({
+            id: newId,
+            name,
+            email,
+            password: hashedPassword,
+            role,
+            isVerified: true // Khi thêm từ admin thì tự động xác thực
+        });
+
+        await user.save();
+        res.status(201).json({
+            message: 'Người dùng đã được thêm thành công',
+            user
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+const updateUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updateData = req.body;
+
+        // Kiểm tra xem người dùng có tồn tại không
+        const user = await User.findOne({ id });
+        if (!user) {
+            return res.status(404).json({
+                message: 'Người dùng không tồn tại'
+            });
+        }
+
+        // Chỉ cho phép cập nhật name và mật khẩu
+        const updates = {};
+        
+        if (updateData.name !== undefined) {
+            updates.name = updateData.name;
+        }
+        if (updateData.password !== undefined) {
+            const salt = await bcrypt.genSalt(10);
+            updates.password = await bcrypt.hash(updateData.password, salt);
+        }
+
+        // Cập nhật người dùng
+        const updatedUser = await User.findOneAndUpdate(
+            { id },
+            updates,
+            { new: true, runValidators: true }
+        );
+
+        // Chỉ trả về các trường cần thiết
+        const userResponse = {
+            id: updatedUser.id,
+            name: updatedUser.name,
+            email: updatedUser.email,
+            role: updatedUser.role,
+            isVerified: updatedUser.isVerified,
+            createdAt: updatedUser.createdAt,
+            updatedAt: updatedUser.updatedAt
+        };
+
+        res.status(200).json({
+            message: 'Người dùng được cập nhật thành công',
+            user: userResponse
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+const getUserById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = await User.findOne({ id });
+
+        if (!user) {
+            return res.status(404).json({
+                message: 'Người dùng không tồn tại'
+            });
+        }
+
+        // Chỉ trả về các trường cần thiết
+        const userResponse = {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            isVerified: user.isVerified,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt
+        };
+
+        res.status(200).json(userResponse);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export { 
+    userRegistration, 
+    userLogin, 
+    userPasswordForget, 
+    userPasswordReset,
+    userVerifyEmail,
+    userLogout,
+    getAllUsers,
+    deleteUser,
+    addUser,
+    updateUser,
+    getUserById
+};

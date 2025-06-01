@@ -8,18 +8,21 @@ import {
 } from "react-router-dom";
 import MainPage from './pages/mainPage';
 import MoviesPage from './pages/movies';
-import TheatersPage from './pages/theatersPage/theaters';
 import AboutFilmora from './pages/aboutFilmoraPage/aboutFilmoraPage';
-import CinemaInfoPage from './pages/cinemaInfo';
+import CinemaInfoPage from './pages/cinemaInfoAndShowTime';
 import ChooseShowTime from './pages/chooseShowTime';
-import ChooseSeat from './pages/chooseSeat';
-import PayTicket from './pages/payTicket';
+import ChooseSeat from './pages/chooseSeat/chooseSeat';
+import PayTicket from './pages/payTicket/payTicket';
 import ForgetPassword from './pages/Auth/ForgetPassword/ForgetPassword';
 import ResetPassword from './pages/Auth/ResetPassword/ResetPassword';
 import VerifyEmail from './pages/Auth/VerifyEmail/VerifyEmail';
 import AuthProvider from './authProvider/authProvider';
 import Register from './pages/Auth/Register/Register';
 import Login from './pages/Auth/Login/Login';
+import CinemaPage from './pages/cinemaPage/cinema';
+import Admin from './pages/admin';
+import ProfilePage from "./pages/Profile/ProfilePage";
+import PrivateRoute from './components/PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -35,15 +38,15 @@ const router = createBrowserRouter([
         element: <MoviesPage />
       },
       {
-        path: "/theaters",
-        element: <TheatersPage />
+        path: "/cinema",
+        element: <CinemaPage />
       },
       {
         path: "/AboutFilmora",
         element: <AboutFilmora />
       },
       {
-        path: "/cinemaDetail",
+        path: "/cinemaDetail/:cinemaId",
         element: <CinemaInfoPage />
       },
       {
@@ -57,7 +60,15 @@ const router = createBrowserRouter([
       {
         path: "/payTicket",
         element: <PayTicket />
-      }
+      },
+      {
+        path: "/profile",
+        element: (
+          <PrivateRoute userOnly>
+            <ProfilePage />
+          </PrivateRoute>
+        ),
+      },
     ]
   },
   {
@@ -79,6 +90,14 @@ const router = createBrowserRouter([
   {
     path: "/verify-email/:token",
     element: <VerifyEmail />
+  },
+  {
+    path: "admin",
+    element: (
+      <PrivateRoute adminOnly>
+        <Admin />
+      </PrivateRoute>
+    )
   }
 ]);
 

@@ -1,0 +1,52 @@
+import { Router } from 'express';
+import Showtime from '../models/Showtime.js';
+import Movie from '../models/Movie.js';
+
+const router = Router();
+
+// API to get all showtimes for a specific cinema
+router.get('/cinema/:cinemaId', async (req, res) => {
+    try {
+        const { cinemaId } = req.params;
+        const { date } = req.query;
+
+        // Get today's date if no date is provided
+        const today = date ? new Date(date) : new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        // Find showtimes for the specific cinema and date
+        const showtimes = await Showtime.find({
+            cinema_id: cinemaId,
+            start_time: { $gte: today, $lt: tomorrow }
+        })
+        .sort({ start_time: 1 })
+        .lean(); // Use lean() to get plain JavaScript objects
+
+        // Fetch movie details for each showtime
+        const movies = await Promise.all(
+            showtimes.map(async (showtime) => {
+                try {
+                    const movie = await Movie.findById(showtime.movie_id);
+                    return movie;
+                } catch (error) {
+                    console.error(`Error fetching movie ${showtime.movie_id}:`, error);
+                    return null;
+                }
+            })
+        );
+
+        // Combine showtimes with their movies
+        const showtimesWithMovies = showtimes.map((showtime, index) => ({
+            ...showtime,
+            movie: movies[index]
+        })).filter(showtime => showtime.movie !== null);
+
+        res.json(showtimesWithMovies);
+    } catch (error) {
+        console.error("Error fetching showtimes:", error);
+        res.status(500).json({ message: error.message });
+    }
+});
+
+export default router;

@@ -1,0 +1,29 @@
+.table-wrapper {
+    width: 100%;
+    margin-top: 50px;
+    overflow-x: auto;
+    box-sizing: border-box;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.ant-btn-small {
+    padding: 4px 8px;
+}
+
+.movie-table-container {
+    margin-top: 30px;
+}
+
+.movie-table-container .add-btn {
+    background-color: #7F6DF8;
+    margin-bottom: 20px;
+}
+
+.movie-table-container .add-btn:hover {
+    text-decoration: none;
+}

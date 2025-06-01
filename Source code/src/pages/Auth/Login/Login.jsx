@@ -23,7 +23,7 @@ const Login = () => {
         };
 
         try {
-            const {status, message} = await handleSubmit(`/login`, body);
+            const {status, message, token} = await handleSubmit(`/login`, body);
 
             if (status === 200) {
                 Swal.fire({

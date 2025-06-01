@@ -1,0 +1,216 @@
+.content-container {
+    margin-left: 260px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    background: #f5f5f5;
+}
+
+.sidebar.active ~ .content-container {
+    margin-left: 60px;
+}
+
+/* Management header */
+.management-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.management-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Action buttons */
+.action-button {
+    background: #7F6DF8;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.action-button:hover {
+    background: #6C5DD7;
+    transform: translateY(-2px);
+}
+
+/* Info management */
+.management {
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.management .profile-info {
+    margin-top: 20px;
+}
+
+.management .profile-content {
+    margin-bottom: 20px;
+}
+
+.management .profile-field {
+    margin-bottom: 16px;
+}
+
+.management .profile-field label {
+    display: block;
+    margin-bottom: 4px;
+    color: #666;
+}
+
+.management .profile-value {
+    padding: 8px;
+    background: #f5f5f5;
+    border-radius: 4px;
+}
+
+.management .profile-actions {
+    text-align: right;
+    margin-top: 16px;
+}
+
+.add-modal{
+    padding: 8px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end !important;
+    background: #7F6DF8;
+    color: #fff;
+    
+}
+
+.management-title {
+    margin: 0;
+    font-size: 28px;
+    color: #333;
+    font-weight: 600;
+}
+
+.info_management-content {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Back button */
+.back-button {
+    background: #7F6DF8;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background: #6C5DD7;
+    transform: translateY(-2px);
+}
+
+.back-button i {
+    font-size: 16px;
+}
+
+.personal-info {
+    display: grid;
+    gap: 20px;
+}
+
+.info-section {
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.info-section h3 {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+}
+
+.info-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.info-item label {
+    font-weight: 500;
+    color: #666;
+}
+
+.info-item span {
+    flex: 1;
+    color: #333;
+}
+
+/* Management lists */
+.movies-list,
+.showtimes-list,
+.cinemas-list,
+.tickets-list,
+.users-list {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Tabs */
+.info_management-tabs {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.info_management-tab {
+    padding: 8px 16px;
+    border: none;
+    background: #f8f9fa;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.info_management-tab:hover,
+.info_management-tab.active {
+    background: #7F6DF8;
+    color: white;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .info_management-content {
+        padding: 15px;
+    }
+    
+    .info-section {
+        padding: 15px;
+    }
+    
+    .info-item {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .info-item label {
+        margin-bottom: 5px;
+    }
+}

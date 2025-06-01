@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
 router.get('/movie/:movieId', async (req, res) => {
     try {
         const { movieId } = req.params;
-        
+
         // Kiểm tra xem phim có tồn tại không
         const movie = await Movie.findById(movieId);
         if (!movie) {
@@ -35,7 +35,7 @@ router.get('/movie/:movieId', async (req, res) => {
         const showtimes = await Showtime.find({ movie_id: movieId })
             .populate('room_id', 'name')
             .sort({ start_time: 1 });
-        
+
         res.json(showtimes);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -46,7 +46,7 @@ router.get('/movie/:movieId', async (req, res) => {
 router.get('/cinema/:cinemaId', async (req, res) => {
     try {
         const { cinemaId } = req.params;
-        
+
         // Kiểm tra xem rạp phim có tồn tại không
         const cinema = await Cinema.findById(cinemaId);
         if (!cinema) {
@@ -60,7 +60,7 @@ router.get('/cinema/:cinemaId', async (req, res) => {
             .populate('movie_id', 'title')
             .populate('room_id', 'name')
             .sort({ start_time: 1 });
-        
+
         res.json(showtimes);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -135,10 +135,10 @@ router.post('/', async (req, res) => {
 
         // Tạo đối tượng giờ chiếu mới
         const showtime = new Showtime(req.body);
-        
+
         // Lưu vào database
         const savedShowtime = await showtime.save();
-        
+
         res.status(201).json({
             message: 'Showtime added successfully',
             showtime: savedShowtime
@@ -233,18 +233,18 @@ router.put('/:id', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        
+
         const showtime = await Showtime.findById(id)
             .populate('movie_id', 'title')
             .populate('room_id', 'name')
             .populate('cinema_id', 'name');
-        
+
         if (!showtime) {
             return res.status(404).json({
                 message: 'Showtime not found'
             });
         }
-        
+
         res.json(showtime);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -255,16 +255,16 @@ router.get('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        
+
         // Tìm và xóa giờ chiếu
         const showtime = await Showtime.findByIdAndDelete(id);
-        
+
         if (!showtime) {
             return res.status(404).json({
                 message: 'Showtime not found'
             });
         }
-        
+
         res.status(200).json({
             message: 'Showtime deleted successfully',
             showtime

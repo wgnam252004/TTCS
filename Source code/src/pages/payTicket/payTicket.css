@@ -1,0 +1,193 @@
+.payTicket__container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #F5EFFF;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.payTicket__content {
+    display: flex;
+    gap: 50px;
+    max-width: 1000px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.payTicket__ticketSection {
+    flex: 1;
+    max-width: 600px;
+}
+
+.payTicket__qrSection {
+    width: 350px;
+    flex-shrink: 0;
+}
+
+.payTicket__header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.payTicket__header h1 {
+    color: #7F6DF8;
+    font-size: 2rem;
+    margin: 0;
+}
+
+.payTicket__infoContainer {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.payTicket__infoHeader {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 16px;
+}
+
+.payTicket__theaterName {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0 0 8px 0;
+}
+
+.payTicket__screenInfo {
+    color: #666;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.payTicket__movieInfo {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #eee;
+}
+
+.payTicket__movieTitle {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #7F6DF8;
+    margin: 0;
+}
+
+.payTicket__ticketDetails {
+    margin-bottom: 20px;
+}
+
+.payTicket__ticketRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.payTicket__seatInfo {
+    font-weight: 500;
+    color: #333;
+}
+
+.payTicket__seatDetails {
+    background: #f8f9fa;
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 12px;
+}
+
+.payTicket__seatDetail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.payTicket__seatDetail:last-child {
+    border-bottom: none;
+}
+
+.payTicket__totalRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-top: 2px solid #7F6DF8;
+    margin-top: 16px;
+}
+
+.payTicket__totalLabel {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.payTicket__totalValue {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #7F6DF8;
+}
+
+.payTicket__actionButtons {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.payTicket__confirmButton {
+    flex: 1;
+    background: #7F6DF8;
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.payTicket__confirmButton:hover {
+    background: #7F6DF8;
+}
+
+.payTicket__backButton {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.payTicket__backButton:hover {
+    background: #545b62;
+}
+
+/* QR Section Styles */
+.payTicket__qrContainer {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.payTicket__qrContainer h3 {
+    color: #333;
+    margin: 0 0 20px 0;
+    font-size: 1.3rem;
+}
+
+.payTicket__qrCode {
+    display: flex;
+    justify-content: center;
+}
+

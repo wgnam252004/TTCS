@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 // API thêm mới rạp phim
 router.post('/', async (req, res) => {
     try {
-        const {
+        const { 
             _id,
             name,
             address,
@@ -25,23 +25,40 @@ router.post('/', async (req, res) => {
         } = req.body;
 
         // Kiểm tra các trường bắt buộc
-        if (!name || !address || !phone || !email || !img) {
+        const requiredFields = ['name', 'address', 'phone', 'email', 'img'];
+        const missingFields = requiredFields.filter(field => !req.body[field]);
+        
+        if (missingFields.length > 0) {
             return res.status(400).json({
                 message: 'Missing required fields',
-                required_fields: ['name', 'address', 'phone', 'email', 'img']
+                required_fields: missingFields
             });
         }
 
-        // Tạo đối tượng rạp phim mới
-        const cinema = new Cinema(req.body);
+        // Validate ID format
+        if (!_id.startsWith('C') || _id.length !== 5) {
+            return res.status(400).json({
+                message: 'ID không đúng định dạng. ID phải bắt đầu bằng C và có 5 ký tự (ví dụ: C0001)'
+            });
+        }
+
+        // Log the incoming data
+        console.log('Received cinema data:', req.body);
+
+        try {
+            // Tạo đối tượng rạp phim mới
+            const cinema = new Cinema(req.body);
         
-        // Lưu vào database
-        const savedCinema = await cinema.save();
+            // Lưu vào database
+            const savedCinema = await cinema.save();
         
-        res.status(201).json({
-            message: 'Cinema added successfully',
-            cinema: savedCinema
-        });
+            res.status(201).json({
+                message: 'Cinema added successfully',
+                cinema: savedCinema
+            });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

@@ -1,0 +1,51 @@
+
+
+.management-title {
+    margin-bottom: 24px;
+    color: #1890ff;
+    font-size: 20px;
+}
+
+.profile-content {
+    margin-bottom: 24px;
+}
+
+.profile-field {
+    margin-bottom: 16px;
+}
+
+.profile-field label {
+    display: block;
+    margin-bottom: 4px;
+    color: #666;
+}
+
+.profile-value {
+    padding: 8px;
+    background: #f5f5f5;
+    border-radius: 4px;
+}
+
+.profile-actions {
+    text-align: right;
+    margin-top: 16px;
+}
+
+.profile-actions .ant-btn {
+    margin-left: 20px;
+}
+
+.ant-form-item-disabled .ant-input {
+    background-color: #f5f5f5;
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 500;
+    cursor: not-allowed;
+}
+
+.ant-modal-content {
+    border-radius: 8px;
+}
+
+.ant-form-item-label label {
+    color: #333;
+}
