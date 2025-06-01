@@ -71,6 +71,8 @@ const createBooking = async (req, res) => {
             showtimeId,
             showtimeDate: showtime.start_time,
             cinemaId: showtime.cinema_id,
+            movie_id: showtime.movie_id,
+            cinema_id: showtime.cinema_id,
             seats,
             totalAmount
         });
@@ -158,44 +160,55 @@ const getUserBookings = async (req, res) => {
     try {
         const { userId } = req.params;
         
-  
-        const bookings = await Booking.find({ userId })
-            .populate({
-                path: 'showtimeId',
-                select: 'movie_id cinema_id',
-                populate: [
-                    {
-                        path: 'movie_id',
-                        select: 'title',
-                        model: 'Movie'
-                    },
-                    {
-                        path: 'cinema_id',
-                        select: 'name',
-                        model: 'Cinema'
-                    }
-                ]
+        if (!userId) {
+            return res.status(400).json({
+                message: 'ID người dùng không hợp lệ'
             });
-        
-     
-        const formattedBookings = bookings.map(booking => ({
-            id: booking.id,
-            userId: booking.userId,
-            showtimeId: booking.showtimeId,
-            showtimeDate: booking.showtimeDate,
-            cinemaId: booking.cinemaId,
-            seats: booking.seats,
-            totalAmount: booking.totalAmount,
-            bookingDate: booking.bookingDate,
-            createdAt: booking.createdAt,
-            updatedAt: booking.updatedAt,
-            ...booking.showtimeId,
-            movieName: booking.showtimeId.movie_id ? booking.showtimeId.movie_id.title : 'Không xác định',
-            cinemaName: booking.showtimeId.cinema_id ? booking.showtimeId.cinema_id.name : 'Không xác định'
-        }));
+        }
 
+        // Tìm tất cả booking của user
+        const bookings = await Booking.find({ userId });
 
-        res.status(200).json(formattedBookings);
+        if (!bookings || bookings.length === 0) {
+            return res.status(200).json([]);
+        }
+
+        // Tạo một mảng để lưu kết quả
+        const results = [];
+
+        // Xử lý từng booking
+        for (const booking of bookings) {
+            try {
+                // Lấy thông tin showtime
+                const showtime = await Showtime.findById(booking.showtimeId);
+                
+                // Lấy thông tin movie
+                const movie = showtime ? await Movie.findById(showtime.movie_id) : null;
+                
+                // Lấy thông tin cinema
+                const cinema = showtime ? await Cinema.findById(showtime.cinema_id) : null;
+
+                // Thêm vào kết quả
+                results.push({
+                    id: booking.id,
+                    userId: booking.userId,
+                    showtimeId: booking.showtimeId,
+                    showtimeDate: booking.showtimeDate,
+                    cinemaId: booking.cinemaId,
+                    seats: booking.seats,
+                    totalAmount: booking.totalAmount,
+                    bookingDate: booking.bookingDate,
+                    createdAt: booking.createdAt,
+                    updatedAt: booking.updatedAt,
+                    movieName: movie ? movie.title : 'Không xác định',
+                    cinemaName: cinema ? cinema.name : 'Không xác định'
+                });
+            } catch (error) {
+                console.error(`Error processing booking ${booking.id}:`, error);
+            }
+        }
+
+        res.status(200).json(results);
     } catch (error) {
         console.error('Error fetching user bookings:', error);
         res.status(500).json({

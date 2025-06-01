@@ -18,7 +18,7 @@ const ProfilePage = () => {
     const fetchUserBookings = async () => {
         try {
             const storedUser = JSON.parse(localStorage.getItem('user'));
-            if (!storedUser) {
+            if (!storedUser || !storedUser.id) {
                 message.error('Không tìm thấy thông tin người dùng');
                 return;
             }
@@ -26,13 +26,22 @@ const ProfilePage = () => {
             const response = await axios.get(`/api/bookings/user/${storedUser.id}`);
             
             if (response.status === 200) {
-                setBookings(response.data);
+                const data = response.data || [];
+                setBookings(data.map(booking => ({
+                    ...booking,
+                    movieName: booking.movieName || 'Không xác định',
+                    cinemaName: booking.cinemaName || 'Không xác định'
+                })));
             } else {
                 message.error('Không thể lấy danh sách vé');
             }
         } catch (error) {
-            message.error('Lỗi khi lấy danh sách vé');
             console.error('Error fetching bookings:', error);
+            if (error.response && error.response.data && error.response.data.message) {
+                message.error(error.response.data.message);
+            } else {
+                message.error('Lỗi khi lấy danh sách vé');
+            }
         } finally {
             setLoading(false);
         }
@@ -49,41 +58,43 @@ const ProfilePage = () => {
             title: 'Tên phim',
             dataIndex: 'movieName',
             key: 'movieName',
-            width: 200
+            width: 200,
+            render: (text, record) => text || 'Không xác định'
         },
         {
             title: 'Rạp',
             dataIndex: 'cinemaName',
             key: 'cinemaName',
-            width: 150
+            width: 150,
+            render: (text, record) => text || 'Không xác định'
         },
         {
             title: 'Ngày chiếu',
             dataIndex: 'showtimeDate',
             key: 'showtimeDate',
             width: 150,
-            render: (date) => new Date(date).toLocaleString('vi-VN')
+            render: (date) => date ? new Date(date).toLocaleString('vi-VN') : 'Không xác định'
         },
         {
             title: 'Ghế',
             dataIndex: 'seats',
             key: 'seats',
             width: 150,
-            render: (seats) => seats.join(', ')
+            render: (seats) => seats ? seats.join(', ') : 'Không xác định'
         },
         {
             title: 'Tổng tiền',
             dataIndex: 'totalAmount',
             key: 'totalAmount',
             width: 150,
-            render: (amount) => `${amount.toLocaleString('vi-VN')} ₫`
+            render: (amount) => amount ? `${amount.toLocaleString('vi-VN')} ₫` : 'Không xác định'
         },
         {
             title: 'Ngày đặt',
             dataIndex: 'bookingDate',
             key: 'bookingDate',
             width: 150,
-            render: (date) => new Date(date).toLocaleString('vi-VN')
+            render: (date) => date ? new Date(date).toLocaleString('vi-VN') : 'Không xác định'
         }
     ];
 
